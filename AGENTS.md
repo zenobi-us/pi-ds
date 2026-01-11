@@ -2,13 +2,11 @@
 
 ## Build & Test Commands
 
-- **Build**: `mise run build` or `bun build ./src/index.ts --outdir dist --target bun`
-- **Test**: `mise run test` or `bun test`
-- **Single Test**: `bun test BackgroundTask.test.ts` (use file glob pattern)
-- **Watch Mode**: `bun test --watch`
-- **Lint**: `mise run lint` (eslint)
-- **Fix Lint**: `mise run lint:fix` (eslint --fix)
-- **Format**: `mise run format` (prettier)
+- **Build**: `mise run build`
+- **Test**: `mise run test`
+- **Lint**: `mise run lint`
+- **Fix Lint**: `mise run lint:fix`
+- **Format**: `mise run format`
 
 ## Code Style Guidelines
 
@@ -57,6 +55,7 @@
 ## Memory
 
 - Store temporary data in `.memory/` directory (gitignored)
+- Load `miniproject` skill for project and knowledge management
 
 ## Project Context
 
