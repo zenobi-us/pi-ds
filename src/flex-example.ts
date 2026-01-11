@@ -6,7 +6,7 @@
 
 import type { ExtensionAPI } from '@mariozechner/pi-coding-agent';
 import { Box, Container, Text } from '@mariozechner/pi-tui';
-import { Grid, Flex, sized } from '@zenobius/pi-mono-ds';
+import { Grid, Flex, sized } from '@zenobius/pi-ds';
 
 export default function (pi: ExtensionAPI) {
   // Example 1: Grid - Equal width columns

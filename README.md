@@ -1,8 +1,6 @@
-# pi-mono-ds
+# pi-ds
 
 A TUI design system for pi-mono
-
-> A TUI design system created from the [bun-module](https://github.com/zenobi-us/bun-module)
 
 ## Features
 
@@ -14,7 +12,21 @@ A TUI design system for pi-mono
 - 🚀 GitHub Actions CI/CD
 - 📝 Release automation with release-please
 
-## Getting Started
+
+## Usage
+
+In your pi-mono extensions, ensure you have a `package.json` file set up. Then, install 
+and import the design system:
+
+```bash
+bun add @zenobius/pi-ds
+```
+
+```typescript
+import { Grid, Flex, Sized, sized } from '@zenobius/pi-ds';
+```
+
+## Development 
 
 1. **Clone this repository:**
 
@@ -26,48 +38,24 @@ A TUI design system for pi-mono
 2. **Install dependencies:**
 
    ```bash
-   bun install
+   mise setup
    ```
 
-3. **Implement your TUI components in `src/index.ts`:**
-
-   ```typescript
-   // TUI design system components for pi-mono
-   export * from './components';
-   ```
+3. **Implement your TUI components in `src/{name}.ts`:**
 
 4. **Test your components:**
+
    ```bash
-   mise run test
+   mise run test #runs pi with a kitchen sink extension that uses the ds
    ```
 
-## Development
+## Dev Commands
 
 - `mise run build` - Build the design system
 - `mise run test` - Run tests
 - `mise run lint` - Lint code
 - `mise run lint:fix` - Fix linting issues
 - `mise run format` - Format code with Prettier
-
-## Usage in pi-mono
-
-Install and import the design system:
-
-```bash
-bun add pi-mono-ds
-```
-
-```typescript
-import { Component } from 'pi-mono-ds';
-```
-
-## Author
-
-Your Name <you@example.com>
-
-## Repository
-
-https://github.com/zenobi-us/pi-ds.git
 
 ## Contributing
 
