@@ -2,6 +2,8 @@
 
 A TUI design system for pi-mono
 
+![](./assets/Kooha-2026-01-12-09-18-42.gif)
+
 ## Features
 
 - 🏗️ TypeScript-based TUI component architecture
