@@ -9,6 +9,246 @@ import { Box, Container, Text } from '@mariozechner/pi-tui';
 import { Grid, Flex, sized } from '@zenobius/pi-ds';
 
 export default function (pi: ExtensionAPI) {
+  // Main command: Show all examples in one view
+  pi.registerCommand('example-ds', {
+    description: 'Show all Grid and Flex layout examples',
+    handler: async (_args, ctx) => {
+      if (!ctx.hasUI) return;
+
+      ctx.ui.setWidget('layout-demo', (tui, theme) => {
+        const container = new Container();
+        const hr = () => new Text(theme.fg('dim', '─'.repeat(60)), 0, 1);
+
+        // Title
+        container.addChild(
+          new Text(theme.bold(theme.fg('accent', '📐 Pi-DS Layout Examples')), 0, 1)
+        );
+        container.addChild(new Text(theme.fg('dim', 'Grid and Flex layout demonstrations'), 0, 1));
+
+        // Dashboard Example
+        container.addChild(hr());
+        container.addChild(new Text(theme.bold(theme.fg('accent', '1. Dashboard')), 0, 1));
+        const metricsRow = new Grid({ spacing: 3 });
+
+        const metric1 = new Box();
+        const m1Content = new Container();
+        m1Content.addChild(new Text(theme.fg('dim', 'Total Users'), 1, 0));
+        m1Content.addChild(new Text(theme.bold(theme.fg('accent', '1,234')), 1, 0));
+        metric1.addChild(m1Content);
+        metricsRow.addChild(metric1);
+
+        const metric2 = new Box();
+        const m2Content = new Container();
+        m2Content.addChild(new Text(theme.fg('dim', 'Active'), 1, 0));
+        m2Content.addChild(new Text(theme.bold(theme.fg('success', '856')), 1, 0));
+        metric2.addChild(m2Content);
+        metricsRow.addChild(metric2);
+
+        const metric3 = new Box();
+        const m3Content = new Container();
+        m3Content.addChild(new Text(theme.fg('dim', 'Errors'), 1, 0));
+        m3Content.addChild(new Text(theme.bold(theme.fg('error', '12')), 1, 0));
+        metric3.addChild(m3Content);
+        metricsRow.addChild(metric3);
+
+        container.addChild(metricsRow);
+        container.addChild(new Text('', 0, 0));
+        container.addChild(new Text(theme.fg('dim', 'Tags:'), 0, 0));
+        const tagsRow = new Flex({ mode: 'wrap', spacing: 1 });
+        const tags = ['production', 'monitoring', 'alerts', 'dashboard', 'metrics'];
+        for (const tag of tags) {
+          tagsRow.addChild(sized(new Text(theme.fg('accent', `[${tag}]`), 0, 0), tag.length + 2));
+        }
+        container.addChild(tagsRow);
+
+        // Grid Example
+        container.addChild(hr());
+        container.addChild(new Text(theme.bold(theme.fg('accent', '2. Grid Layout (Equal Widths)')), 0, 1));
+        const grid = new Grid({ spacing: 2 });
+
+        const box1 = new Box();
+        const box1Content = new Container();
+        box1Content.addChild(new Text(theme.fg('accent', 'Column 1'), 1, 0));
+        box1Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
+        box1Content.addChild(new Text(theme.fg('text', 'Short'), 1, 0));
+        box1Content.addChild(new Text(theme.fg('text', 'content'), 1, 0));
+        box1.addChild(box1Content);
+        grid.addChild(box1);
+
+        const box2 = new Box();
+        const box2Content = new Container();
+        box2Content.addChild(new Text(theme.fg('accent', 'Column 2'), 1, 0));
+        box2Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
+        box2Content.addChild(new Text(theme.fg('text', 'Medium'), 1, 0));
+        box2Content.addChild(new Text(theme.fg('text', 'length'), 1, 0));
+        box2Content.addChild(new Text(theme.fg('text', 'content'), 1, 0));
+        box2.addChild(box2Content);
+        grid.addChild(box2);
+
+        const box3 = new Box();
+        const box3Content = new Container();
+        box3Content.addChild(new Text(theme.fg('accent', 'Column 3'), 1, 0));
+        box3Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
+        box3Content.addChild(new Text(theme.fg('text', 'This is a'), 1, 0));
+        box3Content.addChild(new Text(theme.fg('text', 'much longer'), 1, 0));
+        box3Content.addChild(new Text(theme.fg('text', 'piece of'), 1, 0));
+        box3Content.addChild(new Text(theme.fg('text', 'text content'), 1, 0));
+        box3.addChild(box3Content);
+        grid.addChild(box3);
+
+        container.addChild(grid);
+        container.addChild(new Text(theme.fg('dim', 'All columns get equal width'), 0, 0));
+
+        // Flex Fill Example
+        container.addChild(hr());
+        container.addChild(new Text(theme.bold(theme.fg('accent', '3. Flex Fill Mode')), 0, 1));
+        const flexFill = new Flex({ mode: 'fill', spacing: 2 });
+
+        const fillBox1 = new Box();
+        const fillBox1Content = new Container();
+        fillBox1Content.addChild(new Text(theme.fg('accent', 'Small'), 1, 0));
+        fillBox1Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
+        fillBox1Content.addChild(new Text(theme.fg('text', 'Min: 10'), 1, 0));
+        fillBox1Content.addChild(new Text(theme.fg('text', 'Compact'), 1, 0));
+        fillBox1Content.addChild(new Text(theme.fg('text', 'box'), 1, 0));
+        fillBox1.addChild(fillBox1Content);
+        flexFill.addChild(sized(fillBox1, 10));
+
+        const fillBox2 = new Box();
+        const fillBox2Content = new Container();
+        fillBox2Content.addChild(new Text(theme.fg('accent', 'Medium'), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('text', 'Min: 20'), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('text', 'This box'), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('text', 'wants more'), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('text', 'space'), 1, 0));
+        fillBox2.addChild(fillBox2Content);
+        flexFill.addChild(sized(fillBox2, 20));
+
+        const fillBox3 = new Box();
+        const fillBox3Content = new Container();
+        fillBox3Content.addChild(new Text(theme.fg('accent', 'Regular'), 1, 0));
+        fillBox3Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
+        fillBox3Content.addChild(new Text(theme.fg('text', 'Min: 15'), 1, 0));
+        fillBox3Content.addChild(new Text(theme.fg('text', 'Standard'), 1, 0));
+        fillBox3Content.addChild(new Text(theme.fg('text', 'sized box'), 1, 0));
+        fillBox3.addChild(fillBox3Content);
+        flexFill.addChild(sized(fillBox3, 15));
+
+        container.addChild(flexFill);
+        container.addChild(new Text(theme.fg('dim', 'Each starts at min, shares extra space'), 0, 0));
+
+        // Flex Wrap Example
+        container.addChild(hr());
+        container.addChild(new Text(theme.bold(theme.fg('accent', '4. Flex Wrap Mode')), 0, 1));
+        const flexWrap = new Flex({ mode: 'wrap', spacing: 2 });
+
+        const wrapTags = [
+          { name: 'React', desc: 'UI Library' },
+          { name: 'TypeScript', desc: 'Type-safe' },
+          { name: 'Node.js', desc: 'Runtime' },
+          { name: 'Python', desc: 'Language' },
+          { name: 'Rust', desc: 'Systems' },
+          { name: 'Go', desc: 'Fast' },
+        ];
+
+        for (const tag of wrapTags) {
+          const tagBox = new Box();
+          const tagContent = new Container();
+          tagContent.addChild(new Text(theme.fg('accent', tag.name), 1, 0));
+          tagContent.addChild(new Text(theme.fg('dim', tag.desc), 1, 0));
+          tagBox.addChild(tagContent);
+          flexWrap.addChild(sized(tagBox, tag.name.length + 4));
+        }
+
+        container.addChild(flexWrap);
+        container.addChild(new Text(theme.fg('dim', 'Boxes wrap when they don\'t fit'), 0, 0));
+
+        // Status Cards Example
+        container.addChild(hr());
+        container.addChild(new Text(theme.bold(theme.fg('accent', '5. Status Cards')), 0, 1));
+        const statusGrid = new Grid({ spacing: 2, minColumnWidth: 20 });
+
+        const buildBox = new Box();
+        const buildContent = new Container();
+        buildContent.addChild(new Text(theme.bold(theme.fg('success', '● Build')), 1, 0));
+        buildContent.addChild(new Text(theme.fg('dim', '─'.repeat(15)), 1, 0));
+        buildContent.addChild(new Text(theme.fg('text', 'Status: Passing'), 1, 0));
+        buildContent.addChild(new Text(theme.fg('text', 'Duration: 2m 34s'), 1, 0));
+        buildContent.addChild(new Text(theme.fg('dim', 'Last: 5 min ago'), 1, 0));
+        buildBox.addChild(buildContent);
+        statusGrid.addChild(buildBox);
+
+        const testBox = new Box();
+        const testContent = new Container();
+        testContent.addChild(new Text(theme.bold(theme.fg('success', '● Tests')), 1, 0));
+        testContent.addChild(new Text(theme.fg('dim', '─'.repeat(15)), 1, 0));
+        testContent.addChild(new Text(theme.fg('text', 'Passed: 156'), 1, 0));
+        testContent.addChild(new Text(theme.fg('text', 'Failed: 0'), 1, 0));
+        testContent.addChild(new Text(theme.fg('dim', 'Coverage: 94%'), 1, 0));
+        testBox.addChild(testContent);
+        statusGrid.addChild(testBox);
+
+        const deployBox = new Box();
+        const deployContent = new Container();
+        deployContent.addChild(new Text(theme.bold(theme.fg('warning', '● Deploy')), 1, 0));
+        deployContent.addChild(new Text(theme.fg('dim', '─'.repeat(15)), 1, 0));
+        deployContent.addChild(new Text(theme.fg('text', 'Status: In Progress'), 1, 0));
+        deployContent.addChild(new Text(theme.fg('text', 'Step: 3/5'), 1, 0));
+        deployContent.addChild(new Text(theme.fg('dim', 'ETA: 2 minutes'), 1, 0));
+        deployBox.addChild(deployContent);
+        statusGrid.addChild(deployBox);
+
+        container.addChild(statusGrid);
+
+        // Nested Layouts Example
+        container.addChild(hr());
+        container.addChild(new Text(theme.bold(theme.fg('accent', '6. Nested Layouts')), 0, 1));
+        const outerGrid = new Grid({ spacing: 2 });
+
+        const leftBox = new Box();
+        const leftContent = new Container();
+        leftContent.addChild(new Text(theme.fg('accent', 'Sidebar'), 1, 0));
+        leftContent.addChild(new Text(theme.fg('dim', '━'.repeat(12)), 1, 0));
+        leftContent.addChild(new Text(theme.fg('text', 'Navigation'), 1, 0));
+        leftContent.addChild(new Text(theme.fg('text', 'Settings'), 1, 0));
+        leftContent.addChild(new Text(theme.fg('text', 'Help'), 1, 0));
+        leftBox.addChild(leftContent);
+        outerGrid.addChild(leftBox);
+
+        const rightBox = new Box();
+        const rightContent = new Container();
+        rightContent.addChild(new Text(theme.fg('accent', 'Content'), 1, 0));
+        rightContent.addChild(new Text(theme.fg('dim', '━'.repeat(20)), 1, 0));
+        const cardsGrid = new Grid({ spacing: 1 });
+        for (let i = 1; i <= 3; i++) {
+          const card = new Box();
+          const cardContent = new Container();
+          cardContent.addChild(new Text(theme.fg('text', `Card ${i}`), 1, 0));
+          cardContent.addChild(new Text(theme.fg('dim', `Desc ${i}`), 1, 0));
+          card.addChild(cardContent);
+          cardsGrid.addChild(card);
+        }
+        rightContent.addChild(cardsGrid);
+        rightBox.addChild(rightContent);
+        outerGrid.addChild(rightBox);
+
+        container.addChild(outerGrid);
+        container.addChild(new Text(theme.fg('dim', 'Sidebar + content with nested grid'), 0, 0));
+
+        container.addChild(hr());
+        container.addChild(
+          new Text(theme.fg('dim', 'End of examples - Resize terminal to see responsive behavior'), 0, 0)
+        );
+
+        return container;
+      });
+
+      ctx.ui.notify('All examples shown - scroll to explore!', 'info');
+    },
+  });
+
+  // Keep individual commands for reference
   // Example 1: Grid - Equal width columns
   pi.registerCommand('example-grid', {
     description: 'Show Grid layout (equal widths)',
