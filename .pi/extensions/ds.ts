@@ -79,19 +79,19 @@ export default function (pi: ExtensionAPI) {
         fillBox1Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
         fillBox1Content.addChild(new Text(theme.fg('text', 'UI Library'), 1, 0));
         fillBox1Content.addChild(new Text(theme.fg('text', 'Component'), 1, 0));
-        fillBox1Content.addChild(new Text(theme.fg('dim', 'Min: 15'), 1, 0));
+        fillBox1Content.addChild(new Text(theme.fg('dim', 'Min: 12'), 1, 0));
         fillBox1.addChild(fillBox1Content);
-        flexFill.addChild(sized(fillBox1, 15));
+        flexFill.addChild(sized(fillBox1, 12));
 
         const fillBox2 = new Box();
         const fillBox2Content = new Container();
         fillBox2Content.addChild(new Text(theme.fg('accent', 'TypeScript'), 1, 0));
         fillBox2Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
         fillBox2Content.addChild(new Text(theme.fg('text', 'Type Safety'), 1, 0));
-        fillBox2Content.addChild(new Text(theme.fg('text', 'JavaScript'), 1, 0));
-        fillBox2Content.addChild(new Text(theme.fg('dim', 'Min: 20'), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('text', 'Superset'), 1, 0));
+        fillBox2Content.addChild(new Text(theme.fg('dim', 'Min: 30'), 1, 0));
         fillBox2.addChild(fillBox2Content);
-        flexFill.addChild(sized(fillBox2, 20));
+        flexFill.addChild(sized(fillBox2, 30));
 
         const fillBox3 = new Box();
         const fillBox3Content = new Container();
@@ -99,13 +99,13 @@ export default function (pi: ExtensionAPI) {
         fillBox3Content.addChild(new Text(theme.fg('dim', '─'.repeat(8)), 1, 0));
         fillBox3Content.addChild(new Text(theme.fg('text', 'Runtime'), 1, 0));
         fillBox3Content.addChild(new Text(theme.fg('text', 'Server'), 1, 0));
-        fillBox3Content.addChild(new Text(theme.fg('dim', 'Min: 15'), 1, 0));
+        fillBox3Content.addChild(new Text(theme.fg('dim', 'Min: 12'), 1, 0));
         fillBox3.addChild(fillBox3Content);
-        flexFill.addChild(sized(fillBox3, 15));
+        flexFill.addChild(sized(fillBox3, 12));
 
         container.addChild(flexFill);
         container.addChild(
-          new Text(theme.fg('dim', 'Each starts at minimum, then shares extra space evenly'), 0, 0)
+          new Text(theme.fg('dim', 'TypeScript takes more space (min: 30) vs others (min: 12)'), 0, 0)
         );
 
         // Flex Wrap Example
