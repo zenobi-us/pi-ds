@@ -1,12 +1,12 @@
-# my-opencode-plugin
+# pi-mono-ds
 
-An OpenCode plugin
+A TUI design system for pi-mono
 
-> An OpenCode plugin created from the [bun-module](https://github.com/zenobi-us/bun-module)
+> A TUI design system created from the [bun-module](https://github.com/zenobi-us/bun-module)
 
 ## Features
 
-- 🏗️ TypeScript-based plugin architecture
+- 🏗️ TypeScript-based TUI component architecture
 - 🔧 Mise task runner integration
 - 📦 Bun/npm build tooling
 - ✨ ESLint + Prettier formatting
@@ -16,59 +16,49 @@ An OpenCode plugin
 
 ## Getting Started
 
-1. **Clone this template:**
+1. **Clone this repository:**
 
    ```bash
-   cp -r bun-module your-plugin-name
-   cd your-plugin-name
+   git clone https://github.com/zenobi-us/pi-ds.git
+   cd pi-ds
    ```
 
-2. **Update package.json:**
-   - Change `name` to your plugin name
-   - Update `description`
-   - Update `repository.url`
-
-3. **Install dependencies:**
+2. **Install dependencies:**
 
    ```bash
    bun install
    ```
 
-4. **Implement your plugin in `src/index.ts`:**
+3. **Implement your TUI components in `src/index.ts`:**
 
    ```typescript
-   import type { Plugin } from '@opencode-ai/plugin';
-
-   export const YourPlugin: Plugin = async (ctx) => {
-     return {
-       tool: {
-         // Your plugin tools here
-       },
-     };
-   };
+   // TUI design system components for pi-mono
+   export * from './components';
    ```
 
-5. **Test your plugin:**
+4. **Test your components:**
    ```bash
    mise run test
    ```
 
 ## Development
 
-- `mise run build` - Build the plugin
+- `mise run build` - Build the design system
 - `mise run test` - Run tests
 - `mise run lint` - Lint code
 - `mise run lint:fix` - Fix linting issues
 - `mise run format` - Format code with Prettier
 
-## Installation in OpenCode
+## Usage in pi-mono
 
-Create or edit `~/.config/opencode/config.json`:
+Install and import the design system:
 
-```json
-{
-  "plugins": ["my-opencode-plugin"]
-}
+```bash
+bun add pi-mono-ds
+```
+
+```typescript
+import { Component } from 'pi-mono-ds';
 ```
 
 ## Author

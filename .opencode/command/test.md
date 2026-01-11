@@ -1,36 +1,36 @@
 ---
-description: Test the OpenCode plugin generator end-to-end
+description: Test the TUI design system setup end-to-end
 --- 
 
-# Testing the OpenCode Plugin Generator
+# Testing the TUI Design System Setup
 
-You are a generator testing coordinator. Use the Task tool to delegate testing phases to specialized subagents. Execute these phases in sequence:
+You are a testing coordinator for the pi-mono TUI design system. Use the Task tool to delegate testing phases to specialized subagents. Execute these phases in sequence:
 
 ## Phase 1: Environment Setup & Prerequisites
 
 Use a general subagent to verify the environment is ready:
 
-**Task:** Verify prerequisites for generator testing
+**Task:** Verify prerequisites for design system testing
 
 - Check Bash is installed: `bash --version`
 - Check git is configured: `git config user.name` and `git config user.email`
 - Create or use test directory
 - Report environment status
 
-## Phase 2: Clone & Run Generator
+## Phase 2: Clone & Setup Design System
 
 Use a general subagent to:
 
-- Clone template repo
+- Clone the pi-ds repository
 - Run `./setup.sh` with test inputs:
-  - Plugin name: `test-plugin`
-  - Description: `A test plugin`
+  - Name: `pi-mono-ds`
+  - Description: `A TUI design system for pi-mono`
   - Author: `Test User`
   - Email: `test@example.com`
-  - Repo: `https://github.com/test/test-plugin`
-  - GitHub org: `test`
+  - Repo: `https://github.com/zenobi-us/pi-ds`
+  - GitHub org: `zenobi-us`
 
-## Phase 3: Verify Generator Output
+## Phase 3: Verify Setup Output
 
 Using `task(general)` to validate:
 
@@ -39,10 +39,10 @@ Using `task(general)` to validate:
 - `package.json`, `src/index.ts`, `README.md`, `.github/workflows/`
 - All expected template files present
 
-**Generator Cleanup:**
+**Setup Cleanup:**
 
-- `template/` removed
-- `setup.sh` removed
+- `template/` removed (if present)
+- `setup.sh` removed (if present)
 - Old `.git/` replaced with fresh repo
 
 **Git Repository:**
@@ -54,17 +54,12 @@ Using `task(general)` to validate:
 
 **Template Rendering:**
 
-- `package.json` name matches `test-plugin` (kebab-case)
-- `description`, `author.name`, `author.email` correctly templated
+- `package.json` name matches `pi-mono-ds`
+- `description`, `author.name`, `author.email` correctly set
 - `repository.url` set correctly
-- `README.md` contains plugin name and author info
+- `README.md` contains design system name and author info
 
-**Kebab-Case Conversion:**
-
-- Test with various formats: CamelCase, spaces, underscores, special chars
-- Verify all convert correctly to kebab-case
-
-## Phase 4: Build & Verify Plugin
+## Phase 4: Build & Verify Design System
 
 Use a general subagent to:
 
@@ -80,7 +75,7 @@ Compile results from all phases:
 
 - Overall pass/fail status
 - List of any failures or issues
-- Generated plugin path location
+- Generated design system path location
 - Next development steps for the user
 
 Execute all phases in order using the Task tool with appropriate subagent types. Provide the user with a comprehensive test report upon completion.

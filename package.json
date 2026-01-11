@@ -1,10 +1,10 @@
 {
-  "name": "my-opencode-plugin",
-  "version": "0.1.0",
-  "description": "An OpenCode plugin",
+  "name": "@zenobius/pi-mono-ds",
+  "version": "0.0.1",
+  "description": "A design system for pi-mono extensions.",
   "author": {
-    "name": "Your Name",
-    "email": "you@example.com"
+    "name": "Zenobius",
+    "email": "airtonix@noreply.users.github.com"
   },
   "type": "module",
   "exports": {
@@ -25,10 +25,10 @@
     "dist",
     "src/version.ts"
   ],
-  "dependencies": {
-    "@opencode-ai/plugin": "1.0.85"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@mariozechner/pi-coding-agent": "^0.42.5",
+    "@mariozechner/pi-agent-core": "^0.42.5",
     "@eslint/js": "^9.39.1",
     "@types/node": "^20.11.5",
     "@typescript-eslint/eslint-plugin": "8.47.0",
