@@ -60,6 +60,6 @@
 
 ## Project Context
 
-- **Type**: ES Module package for OpenCode plugin system
+- **Type**: TUI design system for pi-mono
 - **Target**: Bun runtime, ES2021+
-- **Purpose**: Background task execution and lifecycle management
+- **Purpose**: Provide reusable TUI components and patterns
