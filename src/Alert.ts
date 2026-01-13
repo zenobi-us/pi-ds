@@ -53,15 +53,16 @@
  *
  * @example
  * ```typescript
- * // Custom icon and styling
- * const alert = new Alert(theme, {
- *   message: "New features available!",
- *   type: "info",
- *   icon: "🎉",
- *   bgColor: "toolPendingBg",
- *   iconWidth: 8,
- *   padding: 2
- * });
+ * // Custom styling
+ * const alert = new Alert(
+ *   theme,
+ *   "info",
+ *   "New features available!",
+ *   {
+ *     bgColor: "toolPendingBg",
+ *     padding: 2
+ *   }
+ * );
  * ```
  *
  * @example
@@ -145,7 +146,6 @@ export class Alert implements Component {
    *   "Data saved successfully",
    *   {
    *     bgColor: "userMessageBg",
-   *     iconWidth: 10,
    *     padding: 1
    *   }
    * );
@@ -430,8 +430,7 @@ export class Alert implements Component {
  * const alert = createAlert(
  *   theme,
  *   "New features available!",
- *   "info",
- *   { icon: "🎉" }
+ *   "info"
  * );
  * ```
  *
@@ -444,7 +443,6 @@ export class Alert implements Component {
  *   "info",
  *   {
  *     bgColor: "toolPendingBg",
- *     iconWidth: 8,
  *     padding: 2
  *   }
  * );
