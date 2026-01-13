@@ -2,7 +2,7 @@
  * Unit Tests for Flex Component
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Flex } from './Flex';
 import { sized, fixed } from './Sized';
 import { Text } from '@mariozechner/pi-tui';
@@ -382,17 +382,17 @@ describe('Flex Component', () => {
 
       const mockChild1 = sized(
         {
-          render: () => ['test'],
-          invalidate: () => calls.push(1),
-        } as any,
+          render: vi.fn(() => ['test']),
+          invalidate: vi.fn(() => calls.push(1)),
+        },
         20
       );
 
       const mockChild2 = sized(
         {
-          render: () => ['test'],
-          invalidate: () => calls.push(2),
-        } as any,
+          render: vi.fn(() => ['test']),
+          invalidate: vi.fn(() => calls.push(2)),
+        },
         20
       );
 

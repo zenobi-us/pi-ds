@@ -68,6 +68,7 @@ export class Sized implements SizedComponent {
   public readonly fixedWidth?: boolean;
 
   constructor(
+    // eslint-disable-next-line no-unused-vars
     private component: Component,
     preferredWidth: number,
     fixedWidth?: boolean

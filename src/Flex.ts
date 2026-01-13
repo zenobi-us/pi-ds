@@ -533,11 +533,12 @@ export class Flex implements Component {
       case 'left':
         // Left alignment - pad on the right
         return line + ' '.repeat(availableSpace);
-      case 'center':
+      case 'center': {
         // Center alignment - pad equally on both sides
         const leftPad = Math.floor(availableSpace / 2);
         const rightPad = availableSpace - leftPad;
         return ' '.repeat(leftPad) + line + ' '.repeat(rightPad);
+      }
       case 'right':
         // Right alignment - pad on the left
         return ' '.repeat(availableSpace) + line;

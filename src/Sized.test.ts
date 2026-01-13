@@ -2,7 +2,7 @@
  * Unit Tests for Sized Component
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { Sized, sized, fixed } from './Sized';
 import { Text } from '@mariozechner/pi-tui';
 
@@ -145,13 +145,13 @@ describe('Sized Component', () => {
       let invalidateCalled = false;
 
       const mockComponent = {
-        render: () => ['test'],
-        invalidate: () => {
+        render: vi.fn(() => ['test']),
+        invalidate: vi.fn(() => {
           invalidateCalled = true;
-        },
+        }),
       };
 
-      const sizedComponent = new Sized(mockComponent as any, 20);
+      const sizedComponent = new Sized(mockComponent, 20);
       sizedComponent.invalidate();
 
       expect(invalidateCalled).toBe(true);
@@ -163,14 +163,14 @@ describe('Sized Component', () => {
       let inputReceived = '';
 
       const mockComponent = {
-        render: () => ['test'],
-        invalidate: () => {},
-        handleInput: (data: string) => {
+        render: vi.fn(() => ['test']),
+        invalidate: vi.fn(),
+        handleInput: vi.fn((data: string) => {
           inputReceived = data;
-        },
+        }),
       };
 
-      const sizedComponent = new Sized(mockComponent as any, 20);
+      const sizedComponent = new Sized(mockComponent, 20);
       sizedComponent.handleInput?.('test input');
 
       expect(inputReceived).toBe('test input');
@@ -178,11 +178,11 @@ describe('Sized Component', () => {
 
     it('handles missing handleInput gracefully', () => {
       const mockComponent = {
-        render: () => ['test'],
-        invalidate: () => {},
+        render: vi.fn(() => ['test']),
+        invalidate: vi.fn(),
       };
 
-      const sizedComponent = new Sized(mockComponent as any, 20);
+      const sizedComponent = new Sized(mockComponent, 20);
 
       // Should not throw
       expect(() => {

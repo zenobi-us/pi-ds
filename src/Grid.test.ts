@@ -2,7 +2,7 @@
  * Unit Tests for Grid Component
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Grid } from './Grid';
 import { Text } from '@mariozechner/pi-tui';
 import { createOutputMatcher } from './test-helpers';
@@ -298,18 +298,18 @@ describe('Grid Component', () => {
       const calls: number[] = [];
 
       const mockChild1 = {
-        render: () => ['test'],
-        invalidate: () => calls.push(1),
+        render: vi.fn(() => ['test']),
+        invalidate: vi.fn(() => calls.push(1)),
       };
 
       const mockChild2 = {
-        render: () => ['test'],
-        invalidate: () => calls.push(2),
+        render: vi.fn(() => ['test']),
+        invalidate: vi.fn(() => calls.push(2)),
       };
 
       const grid = new Grid();
-      grid.addChild(mockChild1 as any);
-      grid.addChild(mockChild2 as any);
+      grid.addChild(mockChild1);
+      grid.addChild(mockChild2);
 
       grid.invalidate();
 

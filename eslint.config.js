@@ -36,7 +36,7 @@ export default tseslint.config(
       ...prettier.rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       'no-console': 'error',
     },
   }

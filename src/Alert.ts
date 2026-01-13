@@ -157,6 +157,7 @@ export class Alert implements Component {
    * ```
    */
   constructor(
+    // eslint-disable-next-line no-unused-vars
     private theme: Theme,
 
     /**
@@ -169,6 +170,7 @@ export class Alert implements Component {
     public type: AlertType,
 
     /** Alert message (supports multi-line wrapping) */
+    // eslint-disable-next-line no-unused-vars
     public message: string,
 
     /**
@@ -193,7 +195,7 @@ export class Alert implements Component {
     // Build the component hierarchy
     // Box provides padding and background color
     this.container = new Box(this.options.padding, this.options.padding, (s) =>
-      this.theme.bg(this.options.bgColor as any, s)
+      this.theme.bg(this.options.bgColor as ThemeColor, s)
     );
 
     this.container.addChild(this.flex);
@@ -276,6 +278,7 @@ export class Alert implements Component {
    * @param type - Alert type
    * @returns Theme color key (always "text")
    */
+  // eslint-disable-next-line no-unused-vars
   private static getTextColor(type: AlertType): ThemeColor {
     // All use standard text color for readability
     return 'text';
