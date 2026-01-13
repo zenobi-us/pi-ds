@@ -13,8 +13,8 @@
 import type { Component } from '@mariozechner/pi-tui';
 import { Box, Container, Text } from '@mariozechner/pi-tui';
 import { Theme } from '@mariozechner/pi-coding-agent';
-import { Alert } from './ds/Alert.js';
-import { Grid } from './ds/Grid.js';
+import { Alert } from '../../src/Alert.js';
+import { Grid } from '../../src/Grid.js';
 
 export class UISimulator extends Container implements Component {
   private sections: Container[] = [];
