@@ -1,0 +1,26 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`Flex Component Snapshot Tests matches snapshot for fill mode 1`] = `
+[
+  "Column 1                   Column 2                   Column 3                  ",
+]
+`;
+
+exports[`Flex Component Snapshot Tests matches snapshot for wrap mode 1`] = `
+[
+  "Tag 1            Tag 2                  ",
+  "Tag 3            Tag 4                  ",
+]
+`;
+
+exports[`Flex Component Snapshot Tests matches snapshot for fixed + flexible mix 1`] = `
+[
+  "Icon        Message text here                                                   ",
+]
+`;
+
+exports[`Flex Component Snapshot Tests matches snapshot for center alignment 1`] = `
+[
+  "                     Centered              Items                                ",
+]
+`;

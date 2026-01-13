@@ -1,0 +1,13 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`Sized Component Snapshot Tests matches snapshot for sized component 1`] = `
+[
+  "Snapshot test content                                                           ",
+]
+`;
+
+exports[`Sized Component Snapshot Tests matches snapshot for fixed component 1`] = `
+[
+  "Fixed width content                                                             ",
+]
+`;
