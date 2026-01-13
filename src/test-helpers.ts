@@ -49,6 +49,7 @@ export function createOutputMatcher(lines: string[]) {
  * @returns Map of width to output
  */
 export function testAtWidths(
+  // Parameter name 'width' in type signature is for documentation
   // eslint-disable-next-line no-unused-vars
   renderFn: (width: number) => string[],
   widths: number[] = [40, 80, 120, 160]
