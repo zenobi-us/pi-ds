@@ -7,9 +7,8 @@
  * **Layout Structure:**
  * ```
  * ┌─────────────────────────────────────┐
- * │ [icon]     message text here        │
- * │  (fixed    (fills remaining space)  │
- * │   w=10)                              │
+ * │ [icon]  message text here           │
+ * │  (w=5)  (fills remaining space)     │
  * └─────────────────────────────────────┘
  * ```
  *
@@ -17,7 +16,7 @@
  * - 4 Alert Types: success, warning, error, info
  * - Automatic Icon Selection: Default icons based on alert type
  * - Custom Icons: Override with your own icons
- * - Flexible Layout: Icon with fixed width (10 chars default), message fills remaining space
+ * - Flexible Layout: Icon with fixed width (5 chars), message fills remaining space
  * - Theme Integration: Uses theme colors automatically
  * - Dynamic Updates: Change content and type on the fly
  * - Customizable: Configure padding, background colors, and icon width
