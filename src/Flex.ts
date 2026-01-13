@@ -522,10 +522,7 @@ export class Flex implements Component {
     const availableSpace = containerWidth - lineWidth;
 
     if (availableSpace <= 0) {
-      // If line is already at or exceeds container width, pad to exact width
-      if (lineWidth < containerWidth) {
-        return line + ' '.repeat(containerWidth - lineWidth);
-      }
+      // Line is at or exceeds container width; no additional padding applied
       return line;
     }
 
