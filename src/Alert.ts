@@ -318,8 +318,9 @@ export class Alert implements Component {
    * ```
    */
   setType(type: AlertType): void {
+    const hadDefaultIcon = this.icon === Alert.getDefaultIcon(this.type);
     this.type = type;
-    if (!this.icon) {
+    if (hadDefaultIcon) {
       this.icon = Alert.getDefaultIcon(type);
     }
     this.rebuild();
