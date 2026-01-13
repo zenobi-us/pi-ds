@@ -119,13 +119,9 @@ export interface AlertOptions {
  *     - Sized Icon Text (fixed width, default 10 chars)
  *     - Message Text (fills remaining space)
  *
- * **Constructor Signatures:**
+ * **Constructor:**
  * ```typescript
- * // Options-based (recommended)
- * new Alert(theme: Theme, options: AlertOptions)
- *
- * // Legacy (simple cases)
- * new Alert(theme: Theme, icon: string, message: string, type?: AlertType)
+ * new Alert(theme: Theme, type: AlertType, message: string, options?: AlertOptions)
  * ```
  */
 export class Alert implements Component {
