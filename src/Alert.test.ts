@@ -71,7 +71,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(40);
-      
+
       expect(output.length).toBeGreaterThan(0);
       expect(output.every((line) => line.length <= 40)).toBe(true);
     });
@@ -83,7 +83,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(80);
-      
+
       expect(output.length).toBeGreaterThan(0);
       expect(output.every((line) => line.length <= 80)).toBe(true);
     });
@@ -95,7 +95,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(120);
-      
+
       expect(output.length).toBeGreaterThan(0);
       expect(output.every((line) => line.length <= 120)).toBe(true);
     });
@@ -109,14 +109,15 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(80);
-      
+
       expect(output.length).toBeGreaterThan(0);
       // Should still have icon
       expect(createOutputMatcher(output).contains('i')).toBe(true);
     });
 
     it('handles long message', () => {
-      const longMessage = 'This is a very long message that should still render correctly regardless of the length of the content provided to the alert component';
+      const longMessage =
+        'This is a very long message that should still render correctly regardless of the length of the content provided to the alert component';
       const alert = new Alert(theme, 'success', longMessage, {
         bgColor: 'userMessageBg',
         padding: 1,
@@ -124,7 +125,7 @@ describe('Alert Component', () => {
 
       const output = alert.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(output.length).toBeGreaterThan(0);
       expect(matcher.contains('This is a very long message')).toBe(true);
     });
@@ -137,7 +138,7 @@ describe('Alert Component', () => {
 
       const output = alert.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('$PATH')).toBe(true);
       expect(matcher.contains('not found!')).toBe(true);
     });
@@ -151,7 +152,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(80);
-      
+
       expect(output.length).toBeGreaterThan(0);
       // With no padding, content should be directly rendered
       const matcher = createOutputMatcher(output);
@@ -165,7 +166,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(80);
-      
+
       expect(output.length).toBeGreaterThan(0);
       // Should have empty lines for padding
       expect(output.length).toBeGreaterThanOrEqual(3); // top padding, content, bottom padding
@@ -178,7 +179,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(80);
-      
+
       expect(output.length).toBeGreaterThan(0);
       // Should have more lines with larger padding
       expect(output.length).toBeGreaterThanOrEqual(5); // 2 top, content, 2 bottom
@@ -193,7 +194,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(20);
-      
+
       expect(output.length).toBeGreaterThan(0);
     });
 
@@ -204,7 +205,7 @@ describe('Alert Component', () => {
       });
 
       const output = alert.render(10);
-      
+
       expect(output.length).toBeGreaterThan(0);
     });
 
@@ -216,7 +217,7 @@ describe('Alert Component', () => {
 
       const output1 = alert.render(80);
       const output2 = alert.render(80);
-      
+
       expect(output1).toEqual(output2);
     });
   });

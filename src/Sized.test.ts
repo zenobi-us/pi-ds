@@ -92,7 +92,7 @@ describe('Sized Component', () => {
       const sizedComponent = new Sized(text, 20);
 
       const output = sizedComponent.render(40);
-      
+
       expect(output).toBeDefined();
       expect(Array.isArray(output)).toBe(true);
     });
@@ -103,7 +103,7 @@ describe('Sized Component', () => {
 
       const output1 = sizedComponent.render(50);
       const output2 = sizedComponent.render(100);
-      
+
       expect(output1).toBeDefined();
       expect(output2).toBeDefined();
     });
@@ -113,7 +113,7 @@ describe('Sized Component', () => {
       const sizedComponent = new Sized(text, 20);
 
       const output = sizedComponent.render(80);
-      
+
       // The wrapped component receives the width parameter
       expect(output).toBeDefined();
       expect(output.length).toBeGreaterThan(0);
@@ -126,7 +126,7 @@ describe('Sized Component', () => {
       const sizedComponent = new Sized(text, 25);
 
       const wrapped = sizedComponent.getComponent();
-      
+
       expect(wrapped).toBe(text);
     });
 
@@ -135,7 +135,7 @@ describe('Sized Component', () => {
       const sizedComponent = new Sized(originalText, 30);
 
       const retrieved = sizedComponent.getComponent();
-      
+
       expect(retrieved).toBe(originalText);
     });
   });
@@ -143,15 +143,17 @@ describe('Sized Component', () => {
   describe('Invalidation', () => {
     it('calls invalidate on wrapped component', () => {
       let invalidateCalled = false;
-      
+
       const mockComponent = {
         render: () => ['test'],
-        invalidate: () => { invalidateCalled = true; }
+        invalidate: () => {
+          invalidateCalled = true;
+        },
       };
-      
+
       const sizedComponent = new Sized(mockComponent as any, 20);
       sizedComponent.invalidate();
-      
+
       expect(invalidateCalled).toBe(true);
     });
   });
@@ -159,27 +161,29 @@ describe('Sized Component', () => {
   describe('Input Handling', () => {
     it('forwards handleInput to wrapped component when available', () => {
       let inputReceived = '';
-      
+
       const mockComponent = {
         render: () => ['test'],
         invalidate: () => {},
-        handleInput: (data: string) => { inputReceived = data; }
+        handleInput: (data: string) => {
+          inputReceived = data;
+        },
       };
-      
+
       const sizedComponent = new Sized(mockComponent as any, 20);
       sizedComponent.handleInput?.('test input');
-      
+
       expect(inputReceived).toBe('test input');
     });
 
     it('handles missing handleInput gracefully', () => {
       const mockComponent = {
         render: () => ['test'],
-        invalidate: () => {}
+        invalidate: () => {},
       };
-      
+
       const sizedComponent = new Sized(mockComponent as any, 20);
-      
+
       // Should not throw
       expect(() => {
         sizedComponent.handleInput?.('test');
@@ -213,7 +217,7 @@ describe('Sized Component', () => {
       const sizedComponent = new Sized(text, 10);
 
       const output = sizedComponent.render(20);
-      
+
       expect(output).toBeDefined();
       expect(Array.isArray(output)).toBe(true);
     });

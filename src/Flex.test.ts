@@ -40,14 +40,14 @@ describe('Flex Component', () => {
     it('starts with no children', () => {
       const flex = new Flex();
       const output = flex.render(80);
-      
+
       expect(output).toEqual([]);
     });
 
     it('adds single child', () => {
       const flex = new Flex();
       flex.addChild(sized(new Text('Item', 0, 0), 20));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -57,7 +57,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('Item 1', 0, 0), 15));
       flex.addChild(sized(new Text('Item 2', 0, 0), 15));
       flex.addChild(sized(new Text('Item 3', 0, 0), 15));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -66,14 +66,14 @@ describe('Flex Component', () => {
       const flex = new Flex();
       const child1 = sized(new Text('Keep', 0, 0), 20);
       const child2 = sized(new Text('Remove', 0, 0), 20);
-      
+
       flex.addChild(child1);
       flex.addChild(child2);
       flex.removeChild(child2);
-      
+
       const output = flex.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('Keep')).toBe(true);
       expect(matcher.contains('Remove')).toBe(false);
     });
@@ -85,7 +85,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('A', 0, 0), 10)); // min 10
       flex.addChild(sized(new Text('B', 0, 0), 10)); // min 10
       flex.addChild(sized(new Text('C', 0, 0), 10)); // min 10
-      
+
       // Width 80: (80 - 4 spacing) = 76 / 3 = ~25 each
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
@@ -95,10 +95,10 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('Small', 0, 0), 10));
       flex.addChild(sized(new Text('Large', 0, 0), 50));
-      
+
       const output = flex.render(100);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('Small')).toBe(true);
       expect(matcher.contains('Large')).toBe(true);
     });
@@ -108,7 +108,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('A', 0, 0), 15));
       flex.addChild(sized(new Text('B', 0, 0), 20));
       flex.addChild(sized(new Text('C', 0, 0), 25));
-      
+
       const output = flex.render(100);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -119,10 +119,10 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill', spacing: 2 });
       flex.addChild(fixed(new Text('Icon', 0, 0), 10)); // Exactly 10
       flex.addChild(sized(new Text('Message', 0, 0), 20)); // Min 20, can grow
-      
+
       const output = flex.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('Icon')).toBe(true);
       expect(matcher.contains('Message')).toBe(true);
     });
@@ -132,7 +132,7 @@ describe('Flex Component', () => {
       flex.addChild(fixed(new Text('A', 0, 0), 15)); // Fixed at 15
       flex.addChild(sized(new Text('B', 0, 0), 20)); // Can grow
       flex.addChild(sized(new Text('C', 0, 0), 20)); // Can grow
-      
+
       // Width 100: 15 (fixed) + 2 + flexible + 2 + flexible = 100
       // Flexible space: 100 - 15 - 4 = 81 / 2 = ~40 each
       const output = flex.render(100);
@@ -144,10 +144,10 @@ describe('Flex Component', () => {
       flex.addChild(fixed(new Text('A', 0, 0), 10));
       flex.addChild(fixed(new Text('B', 0, 0), 15));
       flex.addChild(sized(new Text('C', 0, 0), 20));
-      
+
       const output = flex.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('A')).toBe(true);
       expect(matcher.contains('B')).toBe(true);
       expect(matcher.contains('C')).toBe(true);
@@ -158,7 +158,7 @@ describe('Flex Component', () => {
       flex.addChild(fixed(new Text('A', 0, 0), 20));
       flex.addChild(fixed(new Text('B', 0, 0), 25));
       flex.addChild(fixed(new Text('C', 0, 0), 30));
-      
+
       const output = flex.render(100);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -170,7 +170,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('First', 0, 0), 30));
       flex.addChild(sized(new Text('Second', 0, 0), 30));
       flex.addChild(sized(new Text('Third', 0, 0), 30));
-      
+
       // Width 40: Can't fit all three, should wrap
       const output = flex.render(40);
       expect(output.length).toBeGreaterThan(1);
@@ -181,7 +181,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('A', 0, 0), 10));
       flex.addChild(sized(new Text('B', 0, 0), 10));
       flex.addChild(sized(new Text('C', 0, 0), 10));
-      
+
       // Width 80: Plenty of space, should stay on one line
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
@@ -192,7 +192,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('Short', 0, 0), 10));
       flex.addChild(sized(new Text('Medium text', 0, 0), 20));
       flex.addChild(sized(new Text('Very long text here', 0, 0), 35));
-      
+
       const output = flex.render(40);
       expect(output.length).toBeGreaterThan(1);
     });
@@ -203,7 +203,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('A', 0, 0), 10));
       flex.addChild(sized(new Text('B', 0, 0), 10));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -212,7 +212,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill', spacing: 4 });
       flex.addChild(sized(new Text('A', 0, 0), 10));
       flex.addChild(sized(new Text('B', 0, 0), 10));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -221,7 +221,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill', spacing: 0 });
       flex.addChild(sized(new Text('A', 0, 0), 10));
       flex.addChild(sized(new Text('B', 0, 0), 10));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -230,7 +230,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'wrap', spacing: 10 });
       flex.addChild(sized(new Text('A', 0, 0), 10));
       flex.addChild(sized(new Text('B', 0, 0), 10));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -240,7 +240,7 @@ describe('Flex Component', () => {
     it('aligns left by default', () => {
       const flex = new Flex({ mode: 'wrap' });
       flex.addChild(sized(new Text('Left', 0, 0), 15));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -248,7 +248,7 @@ describe('Flex Component', () => {
     it('aligns center when specified', () => {
       const flex = new Flex({ mode: 'wrap', align: 'center' });
       flex.addChild(sized(new Text('Center', 0, 0), 15));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -256,7 +256,7 @@ describe('Flex Component', () => {
     it('aligns right when specified', () => {
       const flex = new Flex({ mode: 'wrap', align: 'right' });
       flex.addChild(sized(new Text('Right', 0, 0), 15));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -267,10 +267,10 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('First Item', 0, 0), 20));
       flex.addChild(sized(new Text('Second Item', 0, 0), 20));
-      
+
       const output = flex.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('First Item')).toBe(true);
       expect(matcher.contains('Second Item')).toBe(true);
     });
@@ -279,7 +279,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('', 0, 0), 10));
       flex.addChild(sized(new Text('', 0, 0), 10));
-      
+
       const output = flex.render(80);
       expect(output).toBeDefined();
     });
@@ -289,10 +289,10 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('Short', 0, 0), 10));
       flex.addChild(sized(new Text('Much longer content', 0, 0), 30));
       flex.addChild(sized(new Text('X', 0, 0), 5));
-      
+
       const output = flex.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('Short')).toBe(true);
       expect(matcher.contains('Much longer content')).toBe(true);
       expect(matcher.contains('X')).toBe(true);
@@ -334,7 +334,7 @@ describe('Flex Component', () => {
     it('handles single child', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('Only', 0, 0), 20));
-      
+
       const output = flex.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -342,7 +342,7 @@ describe('Flex Component', () => {
     it('handles very narrow width', () => {
       const flex = new Flex({ mode: 'wrap' });
       flex.addChild(sized(new Text('A', 0, 0), 5));
-      
+
       const output = flex.render(10);
       expect(output).toBeDefined();
     });
@@ -351,7 +351,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('A', 0, 0), 10));
       flex.addChild(sized(new Text('B', 0, 0), 10));
-      
+
       const output = flex.render(500);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -359,7 +359,7 @@ describe('Flex Component', () => {
     it('handles children without preferred width', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(new Text('No sizing', 0, 0));
-      
+
       const output = flex.render(80);
       expect(output).toBeDefined();
     });
@@ -368,10 +368,10 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill' });
       flex.addChild(sized(new Text('Consistent', 0, 0), 20));
       flex.addChild(sized(new Text('Content', 0, 0), 20));
-      
+
       const output1 = flex.render(80);
       const output2 = flex.render(80);
-      
+
       expect(output1).toEqual(output2);
     });
   });
@@ -379,23 +379,29 @@ describe('Flex Component', () => {
   describe('Invalidation', () => {
     it('calls invalidate on all children', () => {
       const calls: number[] = [];
-      
-      const mockChild1 = sized({
-        render: () => ['test'],
-        invalidate: () => calls.push(1)
-      } as any, 20);
-      
-      const mockChild2 = sized({
-        render: () => ['test'],
-        invalidate: () => calls.push(2)
-      } as any, 20);
-      
+
+      const mockChild1 = sized(
+        {
+          render: () => ['test'],
+          invalidate: () => calls.push(1),
+        } as any,
+        20
+      );
+
+      const mockChild2 = sized(
+        {
+          render: () => ['test'],
+          invalidate: () => calls.push(2),
+        } as any,
+        20
+      );
+
       const flex = new Flex();
       flex.addChild(mockChild1);
       flex.addChild(mockChild2);
-      
+
       flex.invalidate();
-      
+
       expect(calls).toContain(1);
       expect(calls).toContain(2);
     });
@@ -407,7 +413,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('Column 1', 0, 0), 20));
       flex.addChild(sized(new Text('Column 2', 0, 0), 20));
       flex.addChild(sized(new Text('Column 3', 0, 0), 20));
-      
+
       const output = flex.render(80);
       expect(output).toMatchSnapshot();
     });
@@ -418,7 +424,7 @@ describe('Flex Component', () => {
       flex.addChild(sized(new Text('Tag 2', 0, 0), 15));
       flex.addChild(sized(new Text('Tag 3', 0, 0), 15));
       flex.addChild(sized(new Text('Tag 4', 0, 0), 15));
-      
+
       const output = flex.render(40);
       expect(output).toMatchSnapshot();
     });
@@ -427,7 +433,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'fill', spacing: 2 });
       flex.addChild(fixed(new Text('Icon', 0, 0), 10));
       flex.addChild(sized(new Text('Message text here', 0, 0), 30));
-      
+
       const output = flex.render(80);
       expect(output).toMatchSnapshot();
     });
@@ -436,7 +442,7 @@ describe('Flex Component', () => {
       const flex = new Flex({ mode: 'wrap', align: 'center', spacing: 2 });
       flex.addChild(sized(new Text('Centered', 0, 0), 20));
       flex.addChild(sized(new Text('Items', 0, 0), 15));
-      
+
       const output = flex.render(80);
       expect(output).toMatchSnapshot();
     });

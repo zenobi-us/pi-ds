@@ -34,14 +34,14 @@ describe('Grid Component', () => {
     it('starts with no children', () => {
       const grid = new Grid();
       const output = grid.render(80);
-      
+
       expect(output).toEqual([]);
     });
 
     it('adds single child', () => {
       const grid = new Grid();
       grid.addChild(new Text('Column 1', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -51,7 +51,7 @@ describe('Grid Component', () => {
       grid.addChild(new Text('Col 1', 0, 0));
       grid.addChild(new Text('Col 2', 0, 0));
       grid.addChild(new Text('Col 3', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -60,14 +60,14 @@ describe('Grid Component', () => {
       const grid = new Grid();
       const child1 = new Text('Keep', 0, 0);
       const child2 = new Text('Remove', 0, 0);
-      
+
       grid.addChild(child1);
       grid.addChild(child2);
       grid.removeChild(child2);
-      
+
       const output = grid.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('Keep')).toBe(true);
       expect(matcher.contains('Remove')).toBe(false);
     });
@@ -76,9 +76,9 @@ describe('Grid Component', () => {
       const grid = new Grid();
       const child = new Text('Exists', 0, 0);
       const nonChild = new Text('Does not exist', 0, 0);
-      
+
       grid.addChild(child);
-      
+
       expect(() => grid.removeChild(nonChild)).not.toThrow();
     });
   });
@@ -88,9 +88,9 @@ describe('Grid Component', () => {
       const grid = new Grid({ spacing: 2 });
       grid.addChild(new Text('A', 0, 0));
       grid.addChild(new Text('B', 0, 0));
-      
+
       const output = grid.render(80);
-      
+
       // With 2 children and 2 spacing: (80 - 2) / 2 = 39 per column
       expect(output.length).toBeGreaterThan(0);
     });
@@ -100,9 +100,9 @@ describe('Grid Component', () => {
       grid.addChild(new Text('A', 0, 0));
       grid.addChild(new Text('B', 0, 0));
       grid.addChild(new Text('C', 0, 0));
-      
+
       const output = grid.render(90);
-      
+
       // With 3 children and 2 spacing each: (90 - 4) / 3 = ~28 per column
       expect(output.length).toBeGreaterThan(0);
     });
@@ -113,9 +113,9 @@ describe('Grid Component', () => {
       grid.addChild(new Text('B', 0, 0));
       grid.addChild(new Text('C', 0, 0));
       grid.addChild(new Text('D', 0, 0));
-      
+
       const output = grid.render(100);
-      
+
       // With 4 children and 2 spacing each: (100 - 6) / 4 = 23.5 -> 23 per column
       expect(output.length).toBeGreaterThan(0);
     });
@@ -126,7 +126,7 @@ describe('Grid Component', () => {
       const grid = new Grid();
       grid.addChild(new Text('First', 0, 0));
       grid.addChild(new Text('Second', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -135,7 +135,7 @@ describe('Grid Component', () => {
       const grid = new Grid({ spacing: 4 });
       grid.addChild(new Text('First', 0, 0));
       grid.addChild(new Text('Second', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -144,7 +144,7 @@ describe('Grid Component', () => {
       const grid = new Grid({ spacing: 0 });
       grid.addChild(new Text('A', 0, 0));
       grid.addChild(new Text('B', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -155,10 +155,10 @@ describe('Grid Component', () => {
       const grid = new Grid({ minColumnWidth: 20 });
       grid.addChild(new Text('Column 1', 0, 0));
       grid.addChild(new Text('Column 2', 0, 0));
-      
+
       // Width 30 < 20 * 2 + spacing, should stack vertically
       const output = grid.render(30);
-      
+
       expect(output.length).toBeGreaterThan(1);
     });
 
@@ -166,10 +166,10 @@ describe('Grid Component', () => {
       const grid = new Grid({ minColumnWidth: 10 });
       grid.addChild(new Text('A', 0, 0));
       grid.addChild(new Text('B', 0, 0));
-      
+
       // Width 80 is plenty for 2 columns at min 10
       const output = grid.render(80);
-      
+
       expect(output.length).toBeGreaterThan(0);
     });
 
@@ -177,7 +177,7 @@ describe('Grid Component', () => {
       const grid = new Grid({ minColumnWidth: 30 });
       grid.addChild(new Text('Wide column', 0, 0));
       grid.addChild(new Text('Another wide column', 0, 0));
-      
+
       const output = grid.render(100);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -188,10 +188,10 @@ describe('Grid Component', () => {
       const grid = new Grid();
       grid.addChild(new Text('First Column', 0, 0));
       grid.addChild(new Text('Second Column', 0, 0));
-      
+
       const output = grid.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('First Column')).toBe(true);
       expect(matcher.contains('Second Column')).toBe(true);
     });
@@ -200,7 +200,7 @@ describe('Grid Component', () => {
       const grid = new Grid();
       grid.addChild(new Text('', 0, 0));
       grid.addChild(new Text('', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output).toBeDefined();
     });
@@ -210,10 +210,10 @@ describe('Grid Component', () => {
       grid.addChild(new Text('Short', 0, 0));
       grid.addChild(new Text('Much longer content here', 0, 0));
       grid.addChild(new Text('X', 0, 0));
-      
+
       const output = grid.render(80);
       const matcher = createOutputMatcher(output);
-      
+
       expect(matcher.contains('Short')).toBe(true);
       expect(matcher.contains('Much longer content here')).toBe(true);
       expect(matcher.contains('X')).toBe(true);
@@ -259,7 +259,7 @@ describe('Grid Component', () => {
     it('handles single child in grid', () => {
       const grid = new Grid();
       grid.addChild(new Text('Only child', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -267,7 +267,7 @@ describe('Grid Component', () => {
     it('handles very narrow width', () => {
       const grid = new Grid({ minColumnWidth: 5 });
       grid.addChild(new Text('A', 0, 0));
-      
+
       const output = grid.render(10);
       expect(output).toBeDefined();
     });
@@ -276,7 +276,7 @@ describe('Grid Component', () => {
       const grid = new Grid();
       grid.addChild(new Text('A', 0, 0));
       grid.addChild(new Text('B', 0, 0));
-      
+
       const output = grid.render(500);
       expect(output.length).toBeGreaterThan(0);
     });
@@ -285,10 +285,10 @@ describe('Grid Component', () => {
       const grid = new Grid();
       grid.addChild(new Text('Consistent', 0, 0));
       grid.addChild(new Text('Content', 0, 0));
-      
+
       const output1 = grid.render(80);
       const output2 = grid.render(80);
-      
+
       expect(output1).toEqual(output2);
     });
   });
@@ -296,23 +296,23 @@ describe('Grid Component', () => {
   describe('Invalidation', () => {
     it('calls invalidate on all children', () => {
       const calls: number[] = [];
-      
+
       const mockChild1 = {
         render: () => ['test'],
-        invalidate: () => calls.push(1)
+        invalidate: () => calls.push(1),
       };
-      
+
       const mockChild2 = {
         render: () => ['test'],
-        invalidate: () => calls.push(2)
+        invalidate: () => calls.push(2),
       };
-      
+
       const grid = new Grid();
       grid.addChild(mockChild1 as any);
       grid.addChild(mockChild2 as any);
-      
+
       grid.invalidate();
-      
+
       expect(calls).toContain(1);
       expect(calls).toContain(2);
     });
@@ -324,7 +324,7 @@ describe('Grid Component', () => {
       grid.addChild(new Text('Column 1', 0, 0));
       grid.addChild(new Text('Column 2', 0, 0));
       grid.addChild(new Text('Column 3', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output).toMatchSnapshot();
     });
@@ -333,7 +333,7 @@ describe('Grid Component', () => {
       const grid = new Grid({ spacing: 5 });
       grid.addChild(new Text('First', 0, 0));
       grid.addChild(new Text('Second', 0, 0));
-      
+
       const output = grid.render(80);
       expect(output).toMatchSnapshot();
     });
@@ -343,7 +343,7 @@ describe('Grid Component', () => {
       for (let i = 1; i <= 5; i++) {
         grid.addChild(new Text(`Col ${i}`, 0, 0));
       }
-      
+
       const output = grid.render(100);
       expect(output).toMatchSnapshot();
     });

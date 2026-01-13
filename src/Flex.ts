@@ -125,29 +125,29 @@ export type FlexMode = 'fill' | 'wrap';
 export type FlexAlign = 'left' | 'center' | 'right';
 
 export interface FlexOptions {
-	/** 
-	 * Layout mode: "fill" (default) or "wrap"
-	 * - fill: Children distribute space evenly across the row
-	 * - wrap: Children flow naturally and wrap to next line when needed
-	 */
-	mode?: FlexMode;
-	
-	/** 
-	 * Spacing between children in characters (default: 2) 
-	 * The gap between adjacent children in the layout
-	 */
-	spacing?: number;
-	
-	/** 
-	 * Horizontal alignment of children within available width (default: "left")
-	 * - left: Content aligned to the left edge
-	 * - center: Content centered within available width
-	 * - right: Content aligned to the right edge
-	 * 
-	 * Note: In wrap mode, each row is independently aligned.
-	 * In fill mode, the entire row is aligned as a unit.
-	 */
-	align?: FlexAlign;
+  /**
+   * Layout mode: "fill" (default) or "wrap"
+   * - fill: Children distribute space evenly across the row
+   * - wrap: Children flow naturally and wrap to next line when needed
+   */
+  mode?: FlexMode;
+
+  /**
+   * Spacing between children in characters (default: 2)
+   * The gap between adjacent children in the layout
+   */
+  spacing?: number;
+
+  /**
+   * Horizontal alignment of children within available width (default: "left")
+   * - left: Content aligned to the left edge
+   * - center: Content centered within available width
+   * - right: Content aligned to the right edge
+   *
+   * Note: In wrap mode, each row is independently aligned.
+   * In fill mode, the entire row is aligned as a unit.
+   */
+  align?: FlexAlign;
 }
 
 /**
@@ -158,429 +158,434 @@ export interface FlexOptions {
  * In wrap mode, preferredWidth determines when to wrap to the next line.
  */
 export interface SizedComponent extends Component {
-	/** Preferred width for this component */
-	preferredWidth?: number;
-	/** If true, component gets exactly preferredWidth and no extra space in fill mode */
-	fixedWidth?: boolean;
+  /** Preferred width for this component */
+  preferredWidth?: number;
+  /** If true, component gets exactly preferredWidth and no extra space in fill mode */
+  fixedWidth?: boolean;
 }
 
 export class Flex implements Component {
-	private children: Component[] = [];
-	private mode: FlexMode;
-	private spacing: number;
-	private align: FlexAlign;
+  private children: Component[] = [];
+  private mode: FlexMode;
+  private spacing: number;
+  private align: FlexAlign;
 
-	constructor(options: FlexOptions = {}) {
-		this.mode = options.mode ?? 'fill';
-		this.spacing = options.spacing ?? 2;
-		this.align = options.align ?? 'left';
-	}
+  constructor(options: FlexOptions = {}) {
+    this.mode = options.mode ?? 'fill';
+    this.spacing = options.spacing ?? 2;
+    this.align = options.align ?? 'left';
+  }
 
-	addChild(component: Component): void {
-		this.children.push(component);
-	}
+  addChild(component: Component): void {
+    this.children.push(component);
+  }
 
-	removeChild(component: Component): void {
-		const index = this.children.indexOf(component);
-		if (index >= 0) {
-			this.children.splice(index, 1);
-		}
-	}
+  removeChild(component: Component): void {
+    const index = this.children.indexOf(component);
+    if (index >= 0) {
+      this.children.splice(index, 1);
+    }
+  }
 
-	clear(): void {
-		this.children = [];
-	}
+  clear(): void {
+    this.children = [];
+  }
 
-	invalidate(): void {
-		for (const child of this.children) {
-			child.invalidate();
-		}
-	}
+  invalidate(): void {
+    for (const child of this.children) {
+      child.invalidate();
+    }
+  }
 
-	render(width: number): string[] {
-		if (this.children.length === 0) {
-			return [];
-		}
+  render(width: number): string[] {
+    if (this.children.length === 0) {
+      return [];
+    }
 
-		if (this.mode === 'fill') {
-			return this.renderFill(width);
-		} else {
-			return this.renderWrap(width);
-		}
-	}
+    if (this.mode === 'fill') {
+      return this.renderFill(width);
+    } else {
+      return this.renderWrap(width);
+    }
+  }
 
-	/**
-	 * Fill mode: Children evenly fill the row
-	 *
-	 * Like Grid but respects preferredWidth as minimum. Extra space is distributed
-	 * evenly among flexible children. Fixed-width children get exactly their preferredWidth.
-	 *
-	 * Algorithm:
-	 * 1. Extract preferredWidth and fixedWidth flags from sized components
-	 * 2. Calculate total space needed by fixed children
-	 * 3. Distribute remaining space among flexible children
-	 * 4. If space doesn't fit, fall back to equal distribution
-	 * 5. Render each child at calculated width (or natural width if child has alignment)
-	 * 6. Combine columns horizontally with spacing
-	 *
-	 * Best Practice: Use fixed() for icons/labels, sized() for flexible columns:
-	 * ```typescript
-	 * // Icon with fixed width, message fills remaining space
-	 * flex.addChild(fixed(icon, 10));
-	 * flex.addChild(message);
-	 * ```
-	 */
-	private renderFill(width: number): string[] {
-		// Calculate intrinsic widths and identify fixed vs flexible children
-		const childInfo = this.children.map((child) => {
-			const isFixed = 'fixedWidth' in child && (child as SizedComponent).fixedWidth === true;
-			const preferredWidth = 'preferredWidth' in child ? ((child as SizedComponent).preferredWidth ?? 0) : 0;
-			return { isFixed, preferredWidth };
-		});
+  /**
+   * Fill mode: Children evenly fill the row
+   *
+   * Like Grid but respects preferredWidth as minimum. Extra space is distributed
+   * evenly among flexible children. Fixed-width children get exactly their preferredWidth.
+   *
+   * Algorithm:
+   * 1. Extract preferredWidth and fixedWidth flags from sized components
+   * 2. Calculate total space needed by fixed children
+   * 3. Distribute remaining space among flexible children
+   * 4. If space doesn't fit, fall back to equal distribution
+   * 5. Render each child at calculated width (or natural width if child has alignment)
+   * 6. Combine columns horizontally with spacing
+   *
+   * Best Practice: Use fixed() for icons/labels, sized() for flexible columns:
+   * ```typescript
+   * // Icon with fixed width, message fills remaining space
+   * flex.addChild(fixed(icon, 10));
+   * flex.addChild(message);
+   * ```
+   */
+  private renderFill(width: number): string[] {
+    // Calculate intrinsic widths and identify fixed vs flexible children
+    const childInfo = this.children.map((child) => {
+      const isFixed = 'fixedWidth' in child && (child as SizedComponent).fixedWidth === true;
+      const preferredWidth =
+        'preferredWidth' in child ? ((child as SizedComponent).preferredWidth ?? 0) : 0;
+      return { isFixed, preferredWidth };
+    });
 
-		const totalSpacing = this.spacing * (this.children.length - 1);
-		const availableWidth = width - totalSpacing;
+    const totalSpacing = this.spacing * (this.children.length - 1);
+    const availableWidth = width - totalSpacing;
 
-		// Calculate space used by fixed children
-		const fixedSpace = childInfo
-			.filter(info => info.isFixed)
-			.reduce((sum, info) => sum + info.preferredWidth, 0);
-		
-		// Count flexible children
-		const flexibleCount = childInfo.filter(info => !info.isFixed).length;
-		
-		// Calculate remaining space for flexible children
-		const remainingSpace = availableWidth - fixedSpace;
+    // Calculate space used by fixed children
+    const fixedSpace = childInfo
+      .filter((info) => info.isFixed)
+      .reduce((sum, info) => sum + info.preferredWidth, 0);
 
-		// Calculate column widths
-		let columnWidths: number[];
-		
-		if (flexibleCount > 0 && remainingSpace > 0) {
-			// Distribute remaining space among flexible children
-			const flexibleMinimums = childInfo
-				.filter(info => !info.isFixed)
-				.reduce((sum, info) => sum + info.preferredWidth, 0);
-			
-			if (flexibleMinimums <= remainingSpace) {
-				// All flexible minimums fit, distribute extra space
-				const extraSpace = remainingSpace - flexibleMinimums;
-				const extraPerFlexible = Math.floor(extraSpace / flexibleCount);
-				
-				columnWidths = childInfo.map(info => {
-					if (info.isFixed) {
-						return info.preferredWidth;
-					} else {
-						return info.preferredWidth + extraPerFlexible;
-					}
-				});
-			} else {
-				// Not enough space for flexible minimums, distribute evenly
-				const widthPerFlexible = Math.floor(remainingSpace / flexibleCount);
-				
-				columnWidths = childInfo.map(info => {
-					if (info.isFixed) {
-						return info.preferredWidth;
-					} else {
-						return widthPerFlexible;
-					}
-				});
-			}
-		} else {
-			// No flexible children or no remaining space
-			// Use equal distribution as fallback
-			const equalWidth = Math.floor(availableWidth / this.children.length);
-			columnWidths = this.children.map(() => equalWidth);
-		}
+    // Count flexible children
+    const flexibleCount = childInfo.filter((info) => !info.isFixed).length;
 
-		// Render children at their allocated widths
-		const columns = this.children.map((child, i) => child.render(columnWidths[i]!));
+    // Calculate remaining space for flexible children
+    const remainingSpace = availableWidth - fixedSpace;
 
-		return this.combineColumns(columns, columnWidths, width);
-	}
+    // Calculate column widths
+    let columnWidths: number[];
 
-	/**
-	 * Wrap mode: Children render at preferredWidth and wrap to next line
-	 *
-	 * Children flow naturally at their preferred width. When a child doesn't fit
-	 * in the current row, it wraps to the next line.
-	 *
-	 * Algorithm:
-	 * 1. For each child, get preferredWidth (or measure if not specified)
-	 * 2. Check if child fits in current row (width + spacing)
-	 * 3. If fits: Add to current row
-	 * 4. If doesn't fit: Flush current row, start new row with this child
-	 * 5. After all children, flush the last row
-	 *
-	 * Natural Flow Example:
-	 * ```
-	 * Terminal: 40 chars wide
-	 * Children: [Short(7)] [Medium(13)] [Long(16)] [Extra(10)]
-	 *
-	 * Row 1: Short(7) + 2 + Medium(13) + 2 + Long(16) = 40 ✓ (exact fit)
-	 * Row 2: Extra(10) = 10 ✓
-	 *
-	 * Result:
-	 *   Short  Medium  Long
-	 *   Extra
-	 * ```
-	 */
-	private renderWrap(width: number): string[] {
-		const lines: string[] = [];
-		let currentRow: Array<{ component: Component; width: number; lines: string[] }> = [];
-		let currentRowWidth = 0;
+    if (flexibleCount > 0 && remainingSpace > 0) {
+      // Distribute remaining space among flexible children
+      const flexibleMinimums = childInfo
+        .filter((info) => !info.isFixed)
+        .reduce((sum, info) => sum + info.preferredWidth, 0);
 
-		for (const child of this.children) {
-			// Get preferred width
-			const preferredWidth =
-				'preferredWidth' in child ? ((child as SizedComponent).preferredWidth ?? 0) : 0;
+      if (flexibleMinimums <= remainingSpace) {
+        // All flexible minimums fit, distribute extra space
+        const extraSpace = remainingSpace - flexibleMinimums;
+        const extraPerFlexible = Math.floor(extraSpace / flexibleCount);
 
-			// If no preferred width, measure by rendering
-			const measuredWidth = preferredWidth > 0 ? preferredWidth : this.measureWidth(child, width);
+        columnWidths = childInfo.map((info) => {
+          if (info.isFixed) {
+            return info.preferredWidth;
+          } else {
+            return info.preferredWidth + extraPerFlexible;
+          }
+        });
+      } else {
+        // Not enough space for flexible minimums, distribute evenly
+        const widthPerFlexible = Math.floor(remainingSpace / flexibleCount);
 
-			// Check if it fits in current row
-			const spaceNeeded =
-				currentRowWidth > 0 ? currentRowWidth + this.spacing + measuredWidth : measuredWidth;
+        columnWidths = childInfo.map((info) => {
+          if (info.isFixed) {
+            return info.preferredWidth;
+          } else {
+            return widthPerFlexible;
+          }
+        });
+      }
+    } else {
+      // No flexible children or no remaining space
+      // Use equal distribution as fallback
+      const equalWidth = Math.floor(availableWidth / this.children.length);
+      columnWidths = this.children.map(() => equalWidth);
+    }
 
-			if (spaceNeeded <= width) {
-				// Fits in current row
-				const childLines = child.render(measuredWidth);
-				currentRow.push({ component: child, width: measuredWidth, lines: childLines });
-				currentRowWidth = spaceNeeded;
-			} else {
-				// Doesn't fit, flush current row and start new one
-				if (currentRow.length > 0) {
-					lines.push(...this.combineRow(currentRow, width));
-					currentRow = [];
-					currentRowWidth = 0;
-				}
+    // Render children at their allocated widths
+    const columns = this.children.map((child, i) => child.render(columnWidths[i]!));
 
-				// Add to new row
-				const childLines = child.render(Math.min(measuredWidth, width));
-				currentRow.push({ component: child, width: measuredWidth, lines: childLines });
-				currentRowWidth = measuredWidth;
-			}
-		}
+    return this.combineColumns(columns, columnWidths, width);
+  }
 
-		// Flush last row
-		if (currentRow.length > 0) {
-			lines.push(...this.combineRow(currentRow, width));
-		}
+  /**
+   * Wrap mode: Children render at preferredWidth and wrap to next line
+   *
+   * Children flow naturally at their preferred width. When a child doesn't fit
+   * in the current row, it wraps to the next line.
+   *
+   * Algorithm:
+   * 1. For each child, get preferredWidth (or measure if not specified)
+   * 2. Check if child fits in current row (width + spacing)
+   * 3. If fits: Add to current row
+   * 4. If doesn't fit: Flush current row, start new row with this child
+   * 5. After all children, flush the last row
+   *
+   * Natural Flow Example:
+   * ```
+   * Terminal: 40 chars wide
+   * Children: [Short(7)] [Medium(13)] [Long(16)] [Extra(10)]
+   *
+   * Row 1: Short(7) + 2 + Medium(13) + 2 + Long(16) = 40 ✓ (exact fit)
+   * Row 2: Extra(10) = 10 ✓
+   *
+   * Result:
+   *   Short  Medium  Long
+   *   Extra
+   * ```
+   */
+  private renderWrap(width: number): string[] {
+    const lines: string[] = [];
+    let currentRow: Array<{ component: Component; width: number; lines: string[] }> = [];
+    let currentRowWidth = 0;
 
-		return lines;
-	}
+    for (const child of this.children) {
+      // Get preferred width
+      const preferredWidth =
+        'preferredWidth' in child ? ((child as SizedComponent).preferredWidth ?? 0) : 0;
 
-	/**
-	 * Measure a component's natural width by rendering it wide
-	 *
-	 * Used when a component doesn't have preferredWidth specified.
-	 * Renders the component at maximum width and measures the longest line.
-	 *
-	 * Note: This is a fallback. For best performance and predictability,
-	 * always use sized() to declare preferred widths explicitly.
-	 */
-	private measureWidth(component: Component, maxWidth: number): number {
-		const lines = component.render(maxWidth);
-		if (lines.length === 0) return 0;
+      // If no preferred width, measure by rendering
+      const measuredWidth = preferredWidth > 0 ? preferredWidth : this.measureWidth(child, width);
 
-		// Find max visible width
-		return Math.max(...lines.map((line) => visibleWidth(line)));
-	}
+      // Check if it fits in current row
+      const spaceNeeded =
+        currentRowWidth > 0 ? currentRowWidth + this.spacing + measuredWidth : measuredWidth;
 
-	/**
-	 * Combine columns horizontally with consistent spacing
-	 *
-	 * Aligns all columns to the same height by padding shorter columns.
-	 * When this Flex has non-left alignment, trims and re-aligns content within allocated width.
-	 *
-	 * Used by fill mode to create Grid-like horizontal alignment.
-	 *
-	 * @param columns - Array of rendered column content
-	 * @param columnWidths - Width allocated to each column
-	 * @param containerWidth - Total available width for alignment
-	 */
-	private combineColumns(columns: string[][], columnWidths: number[], containerWidth?: number): string[] {
-		const maxHeight = Math.max(...columns.map((col) => col.length));
-		const lines: string[] = [];
-		const spacer = ' '.repeat(this.spacing);
+      if (spaceNeeded <= width) {
+        // Fits in current row
+        const childLines = child.render(measuredWidth);
+        currentRow.push({ component: child, width: measuredWidth, lines: childLines });
+        currentRowWidth = spaceNeeded;
+      } else {
+        // Doesn't fit, flush current row and start new one
+        if (currentRow.length > 0) {
+          lines.push(...this.combineRow(currentRow, width));
+          currentRow = [];
+          currentRowWidth = 0;
+        }
 
-		for (let row = 0; row < maxHeight; row++) {
-			const rowParts: string[] = [];
+        // Add to new row
+        const childLines = child.render(Math.min(measuredWidth, width));
+        currentRow.push({ component: child, width: measuredWidth, lines: childLines });
+        currentRowWidth = measuredWidth;
+      }
+    }
 
-			for (let col = 0; col < columns.length; col++) {
-				const column = columns[col]!;
-				const columnWidth = columnWidths[col]!;
-				const line = row < column.length ? column[row]! : '';
+    // Flush last row
+    if (currentRow.length > 0) {
+      lines.push(...this.combineRow(currentRow, width));
+    }
 
-				// Check if child is a Flex with its own alignment preference
-				const child = this.children[col]!;
-				const childAlign = this.getChildAlignment(child);
-				
-				if (childAlign) {
-					// Child Flex wants specific alignment - trim and apply it
-					const trimmedLine = line.trimEnd();
-					const alignedLine = this.applyAlignment(trimmedLine, columnWidth, childAlign);
-					rowParts.push(alignedLine);
-				} else {
-					// Default: pad to column width (left-aligned)
-					const lineWidth = visibleWidth(line);
-					const padding = ' '.repeat(Math.max(0, columnWidth - lineWidth));
-					rowParts.push(line + padding);
-				}
-			}
+    return lines;
+  }
 
-			let rowLine = rowParts.join(spacer);
-			
-			// Apply row-level alignment if container width is provided
-			if (containerWidth !== undefined) {
-				// Trim if this Flex has non-left alignment
-				if (this.align !== 'left') {
-					rowLine = rowLine.trimEnd();
-				}
-				rowLine = this.applyAlignment(rowLine, containerWidth, this.align);
-			}
+  /**
+   * Measure a component's natural width by rendering it wide
+   *
+   * Used when a component doesn't have preferredWidth specified.
+   * Renders the component at maximum width and measures the longest line.
+   *
+   * Note: This is a fallback. For best performance and predictability,
+   * always use sized() to declare preferred widths explicitly.
+   */
+  private measureWidth(component: Component, maxWidth: number): number {
+    const lines = component.render(maxWidth);
+    if (lines.length === 0) return 0;
 
-			lines.push(rowLine);
-		}
+    // Find max visible width
+    return Math.max(...lines.map((line) => visibleWidth(line)));
+  }
 
-		return lines;
-	}
+  /**
+   * Combine columns horizontally with consistent spacing
+   *
+   * Aligns all columns to the same height by padding shorter columns.
+   * When this Flex has non-left alignment, trims and re-aligns content within allocated width.
+   *
+   * Used by fill mode to create Grid-like horizontal alignment.
+   *
+   * @param columns - Array of rendered column content
+   * @param columnWidths - Width allocated to each column
+   * @param containerWidth - Total available width for alignment
+   */
+  private combineColumns(
+    columns: string[][],
+    columnWidths: number[],
+    containerWidth?: number
+  ): string[] {
+    const maxHeight = Math.max(...columns.map((col) => col.length));
+    const lines: string[] = [];
+    const spacer = ' '.repeat(this.spacing);
 
-	/**
-	 * Combine a single row of components for wrap mode
-	 *
-	 * Similar to combineColumns but works with a single row of wrapped items.
-	 * Each item maintains its measured/preferred width with spacing between items.
-	 *
-	 * Used by wrap mode to create natural flowing lines.
-	 *
-	 * @param row - Array of components with their widths and rendered lines
-	 * @param containerWidth - Total available width for alignment
-	 */
-	private combineRow(
-		row: Array<{ component: Component; width: number; lines: string[] }>,
-		containerWidth?: number
-	): string[] {
-		if (row.length === 0) return [];
+    for (let row = 0; row < maxHeight; row++) {
+      const rowParts: string[] = [];
 
-		const maxHeight = Math.max(...row.map((item) => item.lines.length));
-		const lines: string[] = [];
-		const spacer = ' '.repeat(this.spacing);
+      for (let col = 0; col < columns.length; col++) {
+        const column = columns[col]!;
+        const columnWidth = columnWidths[col]!;
+        const line = row < column.length ? column[row]! : '';
 
-		for (let lineIdx = 0; lineIdx < maxHeight; lineIdx++) {
-			const parts: string[] = [];
+        // Check if child is a Flex with its own alignment preference
+        const child = this.children[col]!;
+        const childAlign = this.getChildAlignment(child);
 
-			for (const item of row) {
-				const line = lineIdx < item.lines.length ? item.lines[lineIdx]! : '';
-				const lineWidth = visibleWidth(line);
-				const padding = ' '.repeat(Math.max(0, item.width - lineWidth));
-				parts.push(line + padding);
-			}
+        if (childAlign) {
+          // Child Flex wants specific alignment - trim and apply it
+          const trimmedLine = line.trimEnd();
+          const alignedLine = this.applyAlignment(trimmedLine, columnWidth, childAlign);
+          rowParts.push(alignedLine);
+        } else {
+          // Default: pad to column width (left-aligned)
+          const lineWidth = visibleWidth(line);
+          const padding = ' '.repeat(Math.max(0, columnWidth - lineWidth));
+          rowParts.push(line + padding);
+        }
+      }
 
-			let rowLine = parts.join(spacer);
-			
-			// Apply alignment if container width is provided
-			if (containerWidth !== undefined) {
-				rowLine = this.applyAlignment(rowLine, containerWidth);
-			}
+      let rowLine = rowParts.join(spacer);
 
-			lines.push(rowLine);
-		}
+      // Apply row-level alignment if container width is provided
+      if (containerWidth !== undefined) {
+        // Trim if this Flex has non-left alignment
+        if (this.align !== 'left') {
+          rowLine = rowLine.trimEnd();
+        }
+        rowLine = this.applyAlignment(rowLine, containerWidth, this.align);
+      }
 
-		return lines;
-	}
+      lines.push(rowLine);
+    }
 
-	/**
-	 * Get number of children
-	 */
-	getChildCount(): number {
-		return this.children.length;
-	}
+    return lines;
+  }
 
-	/**
-	 * Get child at index
-	 */
-	getChild(index: number): Component | undefined {
-		return this.children[index];
-	}
+  /**
+   * Combine a single row of components for wrap mode
+   *
+   * Similar to combineColumns but works with a single row of wrapped items.
+   * Each item maintains its measured/preferred width with spacing between items.
+   *
+   * Used by wrap mode to create natural flowing lines.
+   *
+   * @param row - Array of components with their widths and rendered lines
+   * @param containerWidth - Total available width for alignment
+   */
+  private combineRow(
+    row: Array<{ component: Component; width: number; lines: string[] }>,
+    containerWidth?: number
+  ): string[] {
+    if (row.length === 0) return [];
 
-	/**
-	 * Apply horizontal alignment to a line
-	 *
-	 * @param line - The line content to align
-	 * @param containerWidth - Total available width
-	 * @param align - Alignment to apply (defaults to this.align)
-	 * @returns Aligned line with appropriate padding
-	 */
-	private applyAlignment(line: string, containerWidth: number, align?: FlexAlign): string {
-		const alignment = align ?? this.align;
-		const lineWidth = visibleWidth(line);
-		const availableSpace = containerWidth - lineWidth;
+    const maxHeight = Math.max(...row.map((item) => item.lines.length));
+    const lines: string[] = [];
+    const spacer = ' '.repeat(this.spacing);
 
-		if (availableSpace <= 0) {
-			// If line is already at or exceeds container width, pad to exact width
-			if (lineWidth < containerWidth) {
-				return line + ' '.repeat(containerWidth - lineWidth);
-			}
-			return line;
-		}
+    for (let lineIdx = 0; lineIdx < maxHeight; lineIdx++) {
+      const parts: string[] = [];
 
-		switch (alignment) {
-			case 'left':
-				// Left alignment - pad on the right
-				return line + ' '.repeat(availableSpace);
-			case 'center':
-				// Center alignment - pad equally on both sides
-				const leftPad = Math.floor(availableSpace / 2);
-				const rightPad = availableSpace - leftPad;
-				return ' '.repeat(leftPad) + line + ' '.repeat(rightPad);
-			case 'right':
-				// Right alignment - pad on the left
-				return ' '.repeat(availableSpace) + line;
-			default:
-				return line + ' '.repeat(availableSpace);
-		}
-	}
-	
-	/**
-	 * Get alignment preference from a child component
-	 * 
-	 * Checks if the child is a Flex component with its own alignment setting
-	 * 
-	 * @param child - Child component to check
-	 * @returns Child's alignment preference, or undefined
-	 */
-	private getChildAlignment(child: Component): FlexAlign | undefined {
-		if (child instanceof Flex) {
-			return child.getAlign();
-		}
-		return undefined;
-	}
+      for (const item of row) {
+        const line = lineIdx < item.lines.length ? item.lines[lineIdx]! : '';
+        const lineWidth = visibleWidth(line);
+        const padding = ' '.repeat(Math.max(0, item.width - lineWidth));
+        parts.push(line + padding);
+      }
 
-	/**
-	 * Get current mode
-	 */
-	getMode(): FlexMode {
-		return this.mode;
-	}
+      let rowLine = parts.join(spacer);
 
-	/**
-	 * Set layout mode
-	 */
-	setMode(mode: FlexMode): void {
-		this.mode = mode;
-	}
+      // Apply alignment if container width is provided
+      if (containerWidth !== undefined) {
+        rowLine = this.applyAlignment(rowLine, containerWidth);
+      }
 
-	/**
-	 * Get current alignment
-	 */
-	getAlign(): FlexAlign {
-		return this.align;
-	}
+      lines.push(rowLine);
+    }
 
-	/**
-	 * Set horizontal alignment
-	 */
-	setAlign(align: FlexAlign): void {
-		this.align = align;
-	}
+    return lines;
+  }
+
+  /**
+   * Get number of children
+   */
+  getChildCount(): number {
+    return this.children.length;
+  }
+
+  /**
+   * Get child at index
+   */
+  getChild(index: number): Component | undefined {
+    return this.children[index];
+  }
+
+  /**
+   * Apply horizontal alignment to a line
+   *
+   * @param line - The line content to align
+   * @param containerWidth - Total available width
+   * @param align - Alignment to apply (defaults to this.align)
+   * @returns Aligned line with appropriate padding
+   */
+  private applyAlignment(line: string, containerWidth: number, align?: FlexAlign): string {
+    const alignment = align ?? this.align;
+    const lineWidth = visibleWidth(line);
+    const availableSpace = containerWidth - lineWidth;
+
+    if (availableSpace <= 0) {
+      // If line is already at or exceeds container width, pad to exact width
+      if (lineWidth < containerWidth) {
+        return line + ' '.repeat(containerWidth - lineWidth);
+      }
+      return line;
+    }
+
+    switch (alignment) {
+      case 'left':
+        // Left alignment - pad on the right
+        return line + ' '.repeat(availableSpace);
+      case 'center':
+        // Center alignment - pad equally on both sides
+        const leftPad = Math.floor(availableSpace / 2);
+        const rightPad = availableSpace - leftPad;
+        return ' '.repeat(leftPad) + line + ' '.repeat(rightPad);
+      case 'right':
+        // Right alignment - pad on the left
+        return ' '.repeat(availableSpace) + line;
+      default:
+        return line + ' '.repeat(availableSpace);
+    }
+  }
+
+  /**
+   * Get alignment preference from a child component
+   *
+   * Checks if the child is a Flex component with its own alignment setting
+   *
+   * @param child - Child component to check
+   * @returns Child's alignment preference, or undefined
+   */
+  private getChildAlignment(child: Component): FlexAlign | undefined {
+    if (child instanceof Flex) {
+      return child.getAlign();
+    }
+    return undefined;
+  }
+
+  /**
+   * Get current mode
+   */
+  getMode(): FlexMode {
+    return this.mode;
+  }
+
+  /**
+   * Set layout mode
+   */
+  setMode(mode: FlexMode): void {
+    this.mode = mode;
+  }
+
+  /**
+   * Get current alignment
+   */
+  getAlign(): FlexAlign {
+    return this.align;
+  }
+
+  /**
+   * Set horizontal alignment
+   */
+  setAlign(align: FlexAlign): void {
+    this.align = align;
+  }
 }

@@ -52,50 +52,50 @@ import type { Component } from '@mariozechner/pi-tui';
 import type { SizedComponent } from './Flex.js';
 
 export class Sized implements SizedComponent {
-	/**
-	 * Preferred width for this component.
-	 *
-	 * - In Flex fill mode: Acts as minimum width before extra space distribution (unless fixedWidth is true)
-	 * - In Flex wrap mode: Used to determine when to wrap to next line
-	 * - Does not override the width provided to render() method
-	 */
-	public readonly preferredWidth: number;
-	
-	/**
-	 * If true, component gets exactly preferredWidth in fill mode.
-	 * If false/undefined, component can receive extra space distribution.
-	 */
-	public readonly fixedWidth?: boolean;
+  /**
+   * Preferred width for this component.
+   *
+   * - In Flex fill mode: Acts as minimum width before extra space distribution (unless fixedWidth is true)
+   * - In Flex wrap mode: Used to determine when to wrap to next line
+   * - Does not override the width provided to render() method
+   */
+  public readonly preferredWidth: number;
 
-	constructor(
-		private component: Component,
-		preferredWidth: number,
-		fixedWidth?: boolean
-	) {
-		this.preferredWidth = preferredWidth;
-		this.fixedWidth = fixedWidth;
-	}
+  /**
+   * If true, component gets exactly preferredWidth in fill mode.
+   * If false/undefined, component can receive extra space distribution.
+   */
+  public readonly fixedWidth?: boolean;
 
-	render(width: number): string[] {
-		return this.component.render(width);
-	}
+  constructor(
+    private component: Component,
+    preferredWidth: number,
+    fixedWidth?: boolean
+  ) {
+    this.preferredWidth = preferredWidth;
+    this.fixedWidth = fixedWidth;
+  }
 
-	handleInput?(data: string): void {
-		if (this.component.handleInput) {
-			this.component.handleInput(data);
-		}
-	}
+  render(width: number): string[] {
+    return this.component.render(width);
+  }
 
-	invalidate(): void {
-		this.component.invalidate();
-	}
+  handleInput?(data: string): void {
+    if (this.component.handleInput) {
+      this.component.handleInput(data);
+    }
+  }
 
-	/**
-	 * Get the wrapped component
-	 */
-	getComponent(): Component {
-		return this.component;
-	}
+  invalidate(): void {
+    this.component.invalidate();
+  }
+
+  /**
+   * Get the wrapped component
+   */
+  getComponent(): Component {
+    return this.component;
+  }
 }
 
 /**
@@ -138,7 +138,7 @@ export class Sized implements SizedComponent {
  * ```
  */
 export function sized(component: Component, width: number): SizedComponent {
-	return new Sized(component, width);
+  return new Sized(component, width);
 }
 
 /**
@@ -183,5 +183,5 @@ export function sized(component: Component, width: number): SizedComponent {
  * ```
  */
 export function fixed(component: Component, width: number): SizedComponent {
-	return new Sized(component, width, true);
+  return new Sized(component, width, true);
 }

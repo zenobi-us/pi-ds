@@ -85,30 +85,29 @@
  * ```
  */
 
-import type { Component } from "@mariozechner/pi-tui";
-import { Box, Text } from "@mariozechner/pi-tui";
-import { Theme, type ThemeColor } from "@mariozechner/pi-coding-agent";
-import { Flex } from "./Flex.js";
-import { fixed } from "./Sized.js";
+import type { Component } from '@mariozechner/pi-tui';
+import { Box, Text } from '@mariozechner/pi-tui';
+import { Theme, type ThemeColor } from '@mariozechner/pi-coding-agent';
+import { Flex } from './Flex.js';
+import { fixed } from './Sized.js';
 
 /**
  * Alert type affecting icon and color scheme
  */
-export type AlertType = "success" | "warning" | "error" | "info";
+export type AlertType = 'success' | 'warning' | 'error' | 'info';
 
 /**
  * Configuration options for Alert component
  */
 export interface AlertOptions {
+  /** Background color key from theme (default: "userMessageBg") */
+  bgColor?: string;
 
-	/** Background color key from theme (default: "userMessageBg") */
-	bgColor?: string;
-
-	/** 
-	 * Padding around content in characters (default: 1)
-	 * Creates breathing room around alert content
-	 */
-	padding?: number;
+  /**
+   * Padding around content in characters (default: 1)
+   * Creates breathing room around alert content
+   */
+  padding?: number;
 }
 
 /**
@@ -130,284 +129,280 @@ export interface AlertOptions {
  * ```
  */
 export class Alert implements Component {
-	private container: Box;
-	private flex: Flex;
-	private icon: string;
+  private container: Box;
+  private flex: Flex;
+  private icon: string;
 
-	/**
-	 * Create an Alert component
-	 *
-	 * @param theme - Theme instance for colors
-	 * @param type - Alert type (success, warning, error, info)
-	 * @param message - Alert message text
-	 * @param options - Configuration options (merged with defaults)
-	 *
-	 * @example
-	 * ```typescript
-	 * // Recommended: Options object
-	 * const alert = new Alert(
-	 *   theme,
-	 *   "success",
-	 *   "Data saved successfully",
-	 *   {
-	 *     bgColor: "userMessageBg",
-	 *     iconWidth: 10,
-	 *     padding: 1
-	 *   }
-	 * );
-	 * ```
-	 */
-	constructor(
-		private theme: Theme,
+  /**
+   * Create an Alert component
+   *
+   * @param theme - Theme instance for colors
+   * @param type - Alert type (success, warning, error, info)
+   * @param message - Alert message text
+   * @param options - Configuration options (merged with defaults)
+   *
+   * @example
+   * ```typescript
+   * // Recommended: Options object
+   * const alert = new Alert(
+   *   theme,
+   *   "success",
+   *   "Data saved successfully",
+   *   {
+   *     bgColor: "userMessageBg",
+   *     iconWidth: 10,
+   *     padding: 1
+   *   }
+   * );
+   * ```
+   */
+  constructor(
+    private theme: Theme,
 
+    /**
+     * Alert type affecting colors and default icon (default: "info")
+     * - success: green theme
+     * - warning: yellow theme
+     * - error: red theme
+     * - info: accent theme
+     */
+    public type: AlertType,
 
-		/** 
-		 * Alert type affecting colors and default icon (default: "info")
-		 * - success: green theme
-		 * - warning: yellow theme
-		 * - error: red theme
-		 * - info: accent theme
-		 */
-		public type: AlertType,
+    /** Alert message (supports multi-line wrapping) */
+    public message: string,
 
-		/** Alert message (supports multi-line wrapping) */
-		public message: string,
+    /**
+     * Configuration options for alert appearance
+     * - bgColor: Background color key from theme
+     * - padding: Padding around content in characters
+     */
+    public options: Required<AlertOptions> = {
+      bgColor: 'userMessageBg',
+      padding: 1,
+    }
+  ) {
+    // Merge options with defaults
+    // Ensures all required properties are present
+    this.options = Alert.createOptions(options);
+    this.icon = Alert.getDefaultIcon(type);
 
-		/**
-		 * Configuration options for alert appearance
-		 * - bgColor: Background color key from theme
-		 * - padding: Padding around content in characters
-		 */
-		public options: Required<AlertOptions> = {
-			bgColor: "userMessageBg",
-			padding: 1,
-		}
-	) {
+    // Flex layout in fill mode
+    // Icon gets fixed width, message fills remaining space
+    this.flex = new Flex({ mode: 'fill', spacing: 2 });
 
-		// Merge options with defaults
-		// Ensures all required properties are present
-		this.options = Alert.createOptions(options)
-		this.icon = Alert.getDefaultIcon(type);
+    // Build the component hierarchy
+    // Box provides padding and background color
+    this.container = new Box(this.options.padding, this.options.padding, (s) =>
+      this.theme.bg(this.options.bgColor as any, s)
+    );
 
+    this.container.addChild(this.flex);
 
-		// Flex layout in fill mode
-		// Icon gets fixed width, message fills remaining space
-		this.flex = new Flex({ mode: "fill", spacing: 2 });
+    this.rebuild();
+  }
 
-		// Build the component hierarchy
-		// Box provides padding and background color
-		this.container = new Box(this.options.padding, this.options.padding, (s) =>
-			this.theme.bg(this.options.bgColor as any, s)
-		);
+  /**
+   * Create default alert options with proper merging
+   *
+   * Merges partial options with defaults, ensuring all required properties exist.
+   * Used internally by constructor and helper functions.
+   *
+   * @param someOptions - Partial options to merge with defaults
+   * @returns Complete options object with all required properties
+   */
+  public static createOptions(someOptions?: Partial<AlertOptions>): Required<AlertOptions> {
+    return {
+      bgColor: someOptions?.bgColor || 'userMessageBg',
+      padding: someOptions?.padding || 1,
+    };
+  }
 
+  /**
+   * Get default icon for alert type
+   *
+   * Automatic icon selection based on semantic meaning.
+   *
+   * @param type - Alert type
+   * @returns Unicode icon character
+   */
+  private static getDefaultIcon(type: AlertType): string {
+    switch (type) {
+      case 'success':
+        return '✓';
+      case 'warning':
+        return '⚠';
+      case 'error':
+        return '✗';
+      case 'info':
+      default:
+        return 'i';
+    }
+  }
 
-		this.container.addChild(this.flex);
+  /**
+   * Get icon color based on alert type
+   *
+   * Maps alert types to theme color keys for icon foreground:
+   * - success → green theme
+   * - warning → yellow theme
+   * - error → red theme
+   * - info → accent theme
+   *
+   * Colors are chosen for accessibility and visual hierarchy.
+   *
+   * @param type - Alert type
+   * @returns Theme color key
+   */
+  private static getIconColor(type: AlertType): ThemeColor {
+    switch (type) {
+      case 'success':
+        return 'success';
+      case 'warning':
+        return 'warning';
+      case 'error':
+        return 'error';
+      case 'info':
+      default:
+        return 'accent';
+    }
+  }
 
-		this.rebuild()
-	}
+  /**
+   * Get text color based on alert type
+   *
+   * All alert types use standard text color for message content to maintain
+   * readability. The icon color provides the visual distinction.
+   *
+   * @param type - Alert type
+   * @returns Theme color key (always "text")
+   */
+  private static getTextColor(type: AlertType): ThemeColor {
+    // All use standard text color for readability
+    return 'text';
+  }
 
-	/**
-	 * Create default alert options with proper merging
-	 *
-	 * Merges partial options with defaults, ensuring all required properties exist.
-	 * Used internally by constructor and helper functions.
-	 *
-	 * @param someOptions - Partial options to merge with defaults
-	 * @returns Complete options object with all required properties
-	 */
-	public static createOptions(someOptions?: Partial<AlertOptions>): Required<AlertOptions> {
-		return {
-			bgColor: someOptions?.bgColor || "userMessageBg",
-			padding: someOptions?.padding || 1,
-		};
-	}
+  /**
+   * Update alert content dynamically
+   *
+   * Changes the icon and message without recreating the Alert instance.
+   * Useful for updating status messages in long-running operations.
+   *
+   * @param icon - New icon character
+   * @param message - New message text
+   *
+   * @example
+   * ```typescript
+   * const alert = createAlert(theme, "Connecting...", "info");
+   * // Later...
+   * alert.update("✓", "Connected successfully");
+   * ```
+   */
+  update(icon: string, message: string): void {
+    this.icon = icon;
+    this.message = message;
+    this.rebuild();
+  }
 
-	/**
-	 * Get default icon for alert type
-	 *
-	 * Automatic icon selection based on semantic meaning.
-	 *
-	 * @param type - Alert type
-	 * @returns Unicode icon character
-	 */
-	private static getDefaultIcon(type: AlertType): string {
-		switch (type) {
-			case "success":
-				return "✓";
-			case "warning":
-				return "⚠";
-			case "error":
-				return "✗";
-			case "info":
-			default:
-				return "i"
-		}
-	}
+  /**
+   * Change alert type dynamically
+   *
+   * Updates the alert type, which affects colors and (if no custom icon)
+   * the icon character. Useful for status transitions.
+   *
+   * @param type - New alert type
+   *
+   * @example
+   * ```typescript
+   * const alert = createAlert(theme, "Processing...", "info");
+   * // Operation completed
+   * alert.setType("success");
+   * alert.update("✓", "Processing complete");
+   * ```
+   */
+  setType(type: AlertType): void {
+    this.type = type;
+    if (!this.icon) {
+      this.icon = Alert.getDefaultIcon(type);
+    }
+    this.rebuild();
+  }
 
-	/**
-	 * Get icon color based on alert type
-	 *
-	 * Maps alert types to theme color keys for icon foreground:
-	 * - success → green theme
-	 * - warning → yellow theme
-	 * - error → red theme
-	 * - info → accent theme
-	 *
-	 * Colors are chosen for accessibility and visual hierarchy.
-	 *
-	 * @param type - Alert type
-	 * @returns Theme color key
-	 */
-	private static getIconColor(type: AlertType): ThemeColor {
-		switch (type) {
-			case "success":
-				return "success";
-			case "warning":
-				return "warning";
-			case "error":
-				return "error";
-			case "info":
-			default:
-				return "accent";
-		}
-	}
+  /**
+   * Rebuild the component with current options
+   *
+   * Internal method called after updates to reconstruct the component tree.
+   * Clears the Flex container, recreates Text components with current colors,
+   * and re-adds them with proper sizing.
+   */
+  private rebuild(): void {
+    // Clear flex
+    this.flex.clear();
 
-	/**
-	 * Get text color based on alert type
-	 *
-	 * All alert types use standard text color for message content to maintain
-	 * readability. The icon color provides the visual distinction.
-	 *
-	 * @param type - Alert type
-	 * @returns Theme color key (always "text")
-	 */
-	private static getTextColor(type: AlertType): ThemeColor {
-		// All use standard text color for readability
-		return "text";
-	}
+    // Create icon with center alignment
+    const iconFlex = new Flex({ align: 'center' });
+    const iconText = new Text(this.theme.fg(Alert.getIconColor(this.type), this.icon), 0, 0);
+    iconFlex.addChild(iconText);
 
-	/**
-	 * Update alert content dynamically
-	 *
-	 * Changes the icon and message without recreating the Alert instance.
-	 * Useful for updating status messages in long-running operations.
-	 *
-	 * @param icon - New icon character
-	 * @param message - New message text
-	 *
-	 * @example
-	 * ```typescript
-	 * const alert = createAlert(theme, "Connecting...", "info");
-	 * // Later...
-	 * alert.update("✓", "Connected successfully");
-	 * ```
-	 */
-	update(icon: string, message: string): void {
-		this.icon = icon;
-		this.message = message;
-		this.rebuild();
-	}
+    // Create message with left alignment
+    const messageFlex = new Flex({ align: 'left' });
+    const messageText = new Text(this.theme.fg(Alert.getTextColor(this.type), this.message), 0, 0);
+    messageFlex.addChild(messageText);
 
-	/**
-	 * Change alert type dynamically
-	 *
-	 * Updates the alert type, which affects colors and (if no custom icon)
-	 * the icon character. Useful for status transitions.
-	 *
-	 * @param type - New alert type
-	 *
-	 * @example
-	 * ```typescript
-	 * const alert = createAlert(theme, "Processing...", "info");
-	 * // Operation completed
-	 * alert.setType("success");
-	 * alert.update("✓", "Processing complete");
-	 * ```
-	 */
-	setType(type: AlertType): void {
-		this.type = type;
-		if (!this.icon) {
-			this.icon = Alert.getDefaultIcon(type);
-		}
-		this.rebuild();
-	}
+    this.flex.addChild(fixed(iconFlex, 5));
+    this.flex.addChild(messageFlex);
 
-	/**
-	 * Rebuild the component with current options
-	 *
-	 * Internal method called after updates to reconstruct the component tree.
-	 * Clears the Flex container, recreates Text components with current colors,
-	 * and re-adds them with proper sizing.
-	 */
-	private rebuild(): void {
-		// Clear flex
-		this.flex.clear();
+    this.invalidate();
+  }
 
-		// Create icon with center alignment
-		const iconFlex = new Flex({ align: "center" });
-		const iconText = new Text(this.theme.fg(Alert.getIconColor(this.type), this.icon), 0, 0);
-		iconFlex.addChild(iconText);
+  /**
+   * Render the alert to an array of strings
+   *
+   * @param width - Available width in characters
+   * @returns Array of strings representing each line
+   *
+   * The alert automatically wraps message text based on available width.
+   * Layout: [icon (fixed)] [spacing] [message (flexible)]
+   */
+  render(width: number): string[] {
+    return this.container.render(width);
+  }
 
-		// Create message with left alignment
-		const messageFlex = new Flex({ align: "left" });
-		const messageText = new Text(this.theme.fg(Alert.getTextColor(this.type), this.message), 0, 0);
-		messageFlex.addChild(messageText);
+  /**
+   * Invalidate the component, forcing a re-render
+   *
+   * Called automatically by update methods. Can be called manually
+   * if theme or other external state changes.
+   */
+  invalidate(): void {
+    this.container.invalidate();
+  }
 
-		this.flex.addChild(fixed(iconFlex, 5));
-		this.flex.addChild(messageFlex);
+  /**
+   * Get current alert type
+   *
+   * @returns Current alert type (success, warning, error, info)
+   */
+  getType(): AlertType {
+    return this.type;
+  }
 
-		this.invalidate();
-	}
+  /**
+   * Get current message text
+   *
+   * @returns Current message string
+   */
+  getMessage(): string {
+    return this.message;
+  }
 
-	/**
-	 * Render the alert to an array of strings
-	 *
-	 * @param width - Available width in characters
-	 * @returns Array of strings representing each line
-	 *
-	 * The alert automatically wraps message text based on available width.
-	 * Layout: [icon (fixed)] [spacing] [message (flexible)]
-	 */
-	render(width: number): string[] {
-		return this.container.render(width);
-	}
-
-	/**
-	 * Invalidate the component, forcing a re-render
-	 *
-	 * Called automatically by update methods. Can be called manually
-	 * if theme or other external state changes.
-	 */
-	invalidate(): void {
-		this.container.invalidate();
-	}
-
-	/**
-	 * Get current alert type
-	 *
-	 * @returns Current alert type (success, warning, error, info)
-	 */
-	getType(): AlertType {
-		return this.type;
-	}
-
-	/**
-	 * Get current message text
-	 *
-	 * @returns Current message string
-	 */
-	getMessage(): string {
-		return this.message;
-	}
-
-	/**
-	 * Get current icon character
-	 *
-	 * @returns Current icon string (may be default or custom)
-	 */
-	getIcon(): string {
-		return this.icon;
-	}
+  /**
+   * Get current icon character
+   *
+   * @returns Current icon string (may be default or custom)
+   */
+  getIcon(): string {
+    return this.icon;
+  }
 }
 
 /**
@@ -466,14 +461,10 @@ export class Alert implements Component {
  * ```
  */
 export function createAlert(
-	theme: Theme,
-	message: string,
-	type: AlertType = "info",
-	options?: Partial<AlertOptions>
+  theme: Theme,
+  message: string,
+  type: AlertType = 'info',
+  options?: Partial<AlertOptions>
 ): Alert {
-	return new Alert(theme,
-		type,
-		message,
-		Alert.createOptions(options),
-	);
+  return new Alert(theme, type, message, Alert.createOptions(options));
 }
