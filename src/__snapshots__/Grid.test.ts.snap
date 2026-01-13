@@ -1,0 +1,19 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`Grid Component Snapshot Tests matches snapshot for 3-column grid 1`] = `
+[
+  "Column 1                   Column 2                   Column 3                 ",
+]
+`;
+
+exports[`Grid Component Snapshot Tests matches snapshot for wide spacing 1`] = `
+[
+  "First                                     Second                               ",
+]
+`;
+
+exports[`Grid Component Snapshot Tests matches snapshot for many columns 1`] = `
+[
+  "Col 1               Col 2               Col 3               Col 4               Col 5              ",
+]
+`;

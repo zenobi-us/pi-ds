@@ -1,0 +1,33 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`Alert Component Snapshot Tests matches snapshot for success alert 1`] = `
+[
+  "                                                                                ",
+  "   ✓    Operation completed successfully                                        ",
+  "                                                                                ",
+]
+`;
+
+exports[`Alert Component Snapshot Tests matches snapshot for error alert 1`] = `
+[
+  "                                                                                ",
+  "   ✗    Connection to server failed                                             ",
+  "                                                                                ",
+]
+`;
+
+exports[`Alert Component Snapshot Tests matches snapshot for warning alert 1`] = `
+[
+  "                                                                                ",
+  "   ⚠    High memory usage detected                                              ",
+  "                                                                                ",
+]
+`;
+
+exports[`Alert Component Snapshot Tests matches snapshot for info alert 1`] = `
+[
+  "                                                                                ",
+  "   i    System update available                                                 ",
+  "                                                                                ",
+]
+`;
