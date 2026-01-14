@@ -1,6 +1,6 @@
 /**
  * Snapshot Tests for Tabs System
- * 
+ *
  * Captures visual output for regression testing.
  */
 
@@ -143,7 +143,8 @@ describe('Tabs Snapshot Tests', () => {
     it('should match snapshot for pane with long content', () => {
       const controller = new TabController();
       const tab = new Tab('tab1', createText('Tab'));
-      const longContent = 'This is a very long piece of content that spans multiple lines and tests the pane rendering capabilities';
+      const longContent =
+        'This is a very long piece of content that spans multiple lines and tests the pane rendering capabilities';
       const pane = new Pane('tab1', createText(longContent));
       controller.addTab(tab);
       controller.addPane(pane);
@@ -182,13 +183,13 @@ describe('Tabs Snapshot Tests', () => {
     it('should match snapshot for multi-tab interface', () => {
       const controller = new TabController();
 
-      const tabs = ['Dashboard', 'Reports', 'Analytics', 'Settings', 'Help'].map((label, i) =>
-        new Tab(`tab-${i}`, createText(label))
+      const tabs = ['Dashboard', 'Reports', 'Analytics', 'Settings', 'Help'].map(
+        (label, i) => new Tab(`tab-${i}`, createText(label))
       );
       controller.addTabs(...tabs);
 
-      const panes = tabs.map((tab) =>
-        new Pane(tab.getId(), createText(`Content for ${tab.getId()}`))
+      const panes = tabs.map(
+        (tab) => new Pane(tab.getId(), createText(`Content for ${tab.getId()}`))
       );
       controller.addPanes(...panes);
 

@@ -25,10 +25,10 @@ export class TabController {
    */
   addTab(tab: Tab): void {
     const id = tab.getId();
-    
+
     // Check if tab was marked as active BEFORE setting controller
     const shouldActivate = tab.wasMarkedActive();
-    
+
     this.tabs.set(id, tab);
     tab.setController(this);
 

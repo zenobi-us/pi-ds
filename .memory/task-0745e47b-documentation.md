@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** medium
 **Estimated Time:** 2 hours
 **Dependencies:** [Snapshot Tests](task-e1dfec99-snapshot-tests.md)
@@ -150,21 +150,21 @@ console.log(output.join('\n'));
 
 ## Acceptance Criteria
 
-- [ ] File `docs/components/tabs.md` created
-- [ ] Overview section explains tabs purpose and use cases
-- [ ] Installation section shows import statements
-- [ ] Basic usage example is complete and working
-- [ ] TabController API fully documented
-- [ ] Tab component API fully documented
-- [ ] Pane component API fully documented
-- [ ] Advanced usage section covers complex scenarios
-- [ ] Styling and theming section explains customization
-- [ ] At least 3 complete working examples included
-- [ ] Edge cases section covers common issues
-- [ ] Best practices section provides guidance
-- [ ] All code examples tested and verified working
-- [ ] Documentation reviewed for clarity
-- [ ] Screenshots or ASCII art examples included (optional)
+- [x] File `docs/components/tabs.md` created
+- [x] Overview section explains tabs purpose and use cases
+- [x] Installation section shows import statements
+- [x] Basic usage example is complete and working
+- [x] TabController API fully documented
+- [x] Tab component API fully documented
+- [x] Pane component API fully documented
+- [x] Advanced usage section covers complex scenarios
+- [x] Styling and theming section explains customization
+- [x] At least 3 complete working examples included
+- [x] Edge cases section covers common issues
+- [x] Best practices section provides guidance
+- [x] All code examples tested and verified working
+- [x] Documentation reviewed for clarity
+- [x] Screenshots or ASCII art examples included (optional)
 
 ## Related Documents
 

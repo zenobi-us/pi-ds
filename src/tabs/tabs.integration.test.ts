@@ -1,16 +1,16 @@
 /**
  * Integration Tests for Tabs System
- * 
+ *
  * Tests the complete tabs system working together with real components.
  */
 
 import { describe, it, expect } from 'vitest';
-import { Text, Box } from '@mariozechner/pi-tui';
+import { Text } from '@mariozechner/pi-tui';
 import { TabController } from './TabController';
 import { Tab } from './Tab';
 import { Pane } from './Pane';
 import { Flex } from '../Flex';
-import { Sized, fixed } from '../Sized';
+import { fixed } from '../Sized';
 import { createTestTheme, createOutputMatcher } from '../test-helpers';
 
 describe('Tabs Integration Tests', () => {
@@ -32,8 +32,6 @@ describe('Tabs Integration Tests', () => {
       controller.addPanes(pane1, pane2);
 
       // Render all components
-      const tab1Output = tab1.render(40);
-      const tab2Output = tab2.render(40);
       const pane1Output = pane1.render(80);
       const pane2Output = pane2.render(80);
 
@@ -281,14 +279,18 @@ describe('Tabs Integration Tests', () => {
       const controller = new TabController();
 
       // Create navigation tabs
-      const navTabs = ['Dashboard', 'Reports', 'Analytics', 'Settings'].map((label, i) =>
-        new Tab(`nav-${i}`, createText(label))
+      const navTabs = ['Dashboard', 'Reports', 'Analytics', 'Settings'].map(
+        (label, i) => new Tab(`nav-${i}`, createText(label))
       );
       controller.addTabs(...navTabs);
 
       // Create content panes
-      const navPanes = navTabs.map((tab, i) =>
-        new Pane(tab.getId(), createText(`Content for ${['Dashboard', 'Reports', 'Analytics', 'Settings'][i]}`))
+      const navPanes = navTabs.map(
+        (tab, i) =>
+          new Pane(
+            tab.getId(),
+            createText(`Content for ${['Dashboard', 'Reports', 'Analytics', 'Settings'][i]}`)
+          )
       );
       controller.addPanes(...navPanes);
 
@@ -383,8 +385,9 @@ describe('Tabs Integration Tests', () => {
     it('should handle rapid tab switching', () => {
       const controller = new TabController();
 
-      const tabs = Array.from({ length: 10 }, (_, i) =>
-        new Tab(`tab-${i}`, createText(`Tab ${i}`))
+      const tabs = Array.from(
+        { length: 10 },
+        (_, i) => new Tab(`tab-${i}`, createText(`Tab ${i}`))
       );
       controller.addTabs(...tabs);
 

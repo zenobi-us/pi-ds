@@ -112,7 +112,7 @@ describe('Tab Component', () => {
   describe('Callbacks', () => {
     it('should store onSelect callback in options', () => {
       const callback = vi.fn();
-      const tab = new Tab('tab1', createText('Tab'), { onSelect: callback });
+      const _tab = new Tab('tab1', createText('Tab'), { onSelect: callback });
 
       // Callback is stored but not invoked automatically
       expect(callback).not.toHaveBeenCalled();
