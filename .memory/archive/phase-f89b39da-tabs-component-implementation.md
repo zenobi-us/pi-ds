@@ -4,7 +4,7 @@
 **Parent Phase:** Phase 3: Interactive Components
 **Specification:** [Tabs Component Specification](research-e193044a-tabs-component-specification.md)
 **GitHub Issue:** [#4 - Tabs](https://github.com/zenobi-us/pi-ds/issues/4)
-**Status:** Planning
+**Status:** Archived - Completed 2026-01-14
 **Priority:** High
 **Estimated Duration:** 3-5 days
 
@@ -123,6 +123,12 @@ This phase is broken down into 12 detailed task files. Execute these tasks in se
 - ✅ No lint errors
 - ✅ Build succeeds
 - ✅ GitHub issue #4 can be closed
+
+## Learnings Summary
+
+- TabController (Task 2) through wiring (Task 5) taught us that maintaining a single source of truth for active state while exposing registration callbacks keeps tab and pane implementations clean and testable.
+- Tab (Task 3) and Pane (Task 4) components benefit from narrow props and theme-driven styling so they stay predictable when used within complex layouts, which is validated through their dedicated unit suites (Tasks 6-8).
+- Integration (Task 9) and snapshot tests (Task 10) confirmed the controller, tab, and pane cooperate with layout helpers, while documentation (Task 11) and polish (Task 12) codified the simplest API for downstream consumers.
 
 ## Next Steps After Completion
 
