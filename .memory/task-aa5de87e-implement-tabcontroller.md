@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 2 hours
 **Dependencies:** [Setup & Structure](task-cc5daf26-setup-and-structure.md)
@@ -69,20 +69,20 @@ export class TabController {
 
 ## Acceptance Criteria
 
-- [ ] TabController class defined in `src/tabs/TabController.ts`
-- [ ] Constructor initializes empty maps and null activeId
-- [ ] `addTab()` method stores tab and sets controller reference
-- [ ] `addTabs()` method adds multiple tabs
-- [ ] `addPane()` method stores pane and sets controller reference
-- [ ] `addPanes()` method adds multiple panes
-- [ ] `setActive()` method updates activeId
-- [ ] `setActive()` throws error for invalid tab ID
-- [ ] `getActive()` returns current activeId
-- [ ] `getTab()` returns tab by ID or undefined
-- [ ] `getPane()` returns pane by ID or undefined
-- [ ] TypeScript strict mode compliance verified
-- [ ] `mise run lint` passes
-- [ ] `mise run build` succeeds
+- [x] TabController class defined in `src/tabs/TabController.ts`
+- [x] Constructor initializes empty maps and null activeId
+- [x] `addTab()` method stores tab and sets controller reference
+- [x] `addTabs()` method adds multiple tabs
+- [x] `addPane()` method stores pane and sets controller reference
+- [x] `addPanes()` method adds multiple panes
+- [x] `setActive()` method updates activeId
+- [x] `setActive()` throws error for invalid tab ID
+- [x] `getActive()` returns current activeId
+- [x] `getTab()` returns tab by ID or undefined
+- [x] `getPane()` returns pane by ID or undefined
+- [x] TypeScript strict mode compliance verified
+- [x] `mise run lint` passes (5 warnings only)
+- [x] `mise run build` succeeds (32 modules bundled)
 
 ## Related Documents
 

@@ -21,65 +21,76 @@ export class TabController {
 
   /**
    * Register a tab with the controller
+   * Sets up bidirectional link between controller and tab
    */
-  addTab(_tab: Tab): void {
-    // TODO: Implement in Task 2
-    throw new Error('Not implemented');
+  addTab(tab: Tab): void {
+    const id = tab.getId();
+    this.tabs.set(id, tab);
+    tab.setController(this);
+
+    // If this is the first tab or marked as active, activate it
+    if (this.activeId === null || tab.isActive()) {
+      this.activeId = id;
+    }
   }
 
   /**
    * Register multiple tabs with the controller
    */
-  addTabs(..._tabs: Tab[]): void {
-    // TODO: Implement in Task 2
-    throw new Error('Not implemented');
+  addTabs(...tabs: Tab[]): void {
+    for (const tab of tabs) {
+      this.addTab(tab);
+    }
   }
 
   /**
    * Register a pane with the controller
+   * Sets up bidirectional link between controller and pane
    */
-  addPane(_pane: Pane): void {
-    // TODO: Implement in Task 2
-    throw new Error('Not implemented');
+  addPane(pane: Pane): void {
+    const id = pane.getTabId();
+    this.panes.set(id, pane);
+    pane.setController(this);
   }
 
   /**
    * Register multiple panes with the controller
    */
-  addPanes(..._panes: Pane[]): void {
-    // TODO: Implement in Task 2
-    throw new Error('Not implemented');
+  addPanes(...panes: Pane[]): void {
+    for (const pane of panes) {
+      this.addPane(pane);
+    }
   }
 
   /**
    * Set the active tab by ID
+   * Throws error if tab ID doesn't exist
    */
-  setActive(_id: string): void {
-    // TODO: Implement in Task 2
-    throw new Error('Not implemented');
+  setActive(id: string): void {
+    if (!this.tabs.has(id)) {
+      throw new Error(`Tab with ID "${id}" not found`);
+    }
+    this.activeId = id;
   }
 
   /**
    * Get the currently active tab ID
    */
   getActive(): string | null {
-    // TODO: Implement in Task 2
-    return null;
+    return this.activeId;
   }
 
   /**
    * Retrieve a tab by its ID
    */
-  getTab(_id: string): Tab | undefined {
-    // TODO: Implement in Task 2
-    return undefined;
+  getTab(id: string): Tab | undefined {
+    return this.tabs.get(id);
   }
 
   /**
    * Retrieve a pane by its ID
    */
-  getPane(_id: string): Pane | undefined {
-    // TODO: Implement in Task 2
-    return undefined;
+  getPane(id: string): Pane | undefined {
+    return this.panes.get(id);
   }
 }
