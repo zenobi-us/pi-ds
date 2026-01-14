@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 1 hour
 **Dependencies:** [Implement TabController](task-aa5de87e-implement-tabcontroller.md)
@@ -72,19 +72,19 @@ export class Pane implements Component {
 
 ## Acceptance Criteria
 
-- [ ] Pane class defined in `src/tabs/Pane.ts`
-- [ ] Implements Component interface with `render(width: number): string[]`
-- [ ] Constructor stores tabId and content
-- [ ] `setController()` method stores controller reference
-- [ ] `render()` returns empty array when inactive
-- [ ] `render()` returns content.render(width) when active
-- [ ] `isActive()` checks if controller.getActive() matches tabId
-- [ ] `isActive()` returns false when no controller
-- [ ] `getTabId()` returns the associated tab ID
-- [ ] Content renders at full width (no padding reduction)
-- [ ] TypeScript strict mode compliance
-- [ ] `mise run lint` passes
-- [ ] `mise run build` succeeds
+- [x] Pane class defined in `src/tabs/Pane.ts`
+- [x] Implements Component interface with `render(width: number): string[]`
+- [x] Constructor stores tabId and content
+- [x] `setController()` method stores controller reference
+- [x] `render()` returns empty array when inactive
+- [x] `render()` returns content.render(width) when active
+- [x] `isActive()` checks if controller.getActive() matches tabId
+- [x] `isActive()` returns false when no controller
+- [x] `getTabId()` returns the associated tab ID
+- [x] Content renders at full width (no padding reduction)
+- [x] TypeScript strict mode compliance
+- [x] `mise run lint` passes
+- [x] `mise run build` succeeds
 
 ## Related Documents
 

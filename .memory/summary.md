@@ -6,9 +6,9 @@
 A TUI design system for pi-mono. Built as a Bun module targeting ES2021+.
 
 ## Current Status
-**Status:** Phase 3 In Progress - Task 1 Complete
+**Status:** Phase 3 In Progress - Tasks 1-5 Complete
 **Active Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Active Phases:** Phase 3: Interactive Components (Task 1/12 Complete)
+**Active Phases:** Phase 3: Interactive Components (Tasks 1-5/12 Complete - 42%)
 
 ## Active Epic: pi-ds TUI Design System
 
@@ -27,7 +27,7 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 ### Current Phase Status
 - ✅ Phase 1: Foundation & Testing Infrastructure (Completed 2026-01-12)
 - ✅ Phase 2: Testing Infrastructure Setup (Completed 2026-01-14)
-- 🔄 Phase 3: Interactive Components (In Progress - Task 1/12 Complete)
+- 🔄 Phase 3: Interactive Components (In Progress - Tasks 1-5/12 Complete - 42%)
 - ⏳ Phase 4: Input Components (Planned)
 - ⏳ Phase 5: Documentation & Publishing (Planned)
 

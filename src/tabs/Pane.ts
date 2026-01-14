@@ -5,7 +5,7 @@
  * Queries TabController to determine visibility state.
  */
 
-import type { Component } from '../types.ts';
+import type { Component } from '@mariozechner/pi-tui';
 import type { TabController } from './TabController.ts';
 
 export class Pane implements Component {
@@ -23,25 +23,37 @@ export class Pane implements Component {
    * Set the controller for this pane
    * Called by TabController.addPane()
    */
-  setController(_controller: TabController): void {
-    // TODO: Implement in Task 4
-    throw new Error('Not implemented');
+  setController(controller: TabController): void {
+    this.controller = controller;
   }
 
   /**
    * Render the pane content if active, otherwise return empty
+   *
+   * Only visible when the associated tab is the active tab.
+   * Content is rendered at full available width.
    */
-  render(_width: number): string[] {
-    // TODO: Implement in Task 4
-    throw new Error('Not implemented');
+  render(width: number): string[] {
+    // Exit early if not active - return empty array
+    if (!this.isActive()) {
+      return [];
+    }
+
+    // Render content at full width
+    return this.content.render(width);
   }
 
   /**
    * Check if this pane's tab is currently active
+   *
+   * Returns false if no controller is set (disconnected state).
+   * Otherwise, queries controller for active tab ID.
    */
   isActive(): boolean {
-    // TODO: Implement in Task 4
-    return false;
+    if (!this.controller) {
+      return false;
+    }
+    return this.controller.getActive() === this.tabId;
   }
 
   /**

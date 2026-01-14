@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 1 hour
 **Dependencies:** 
@@ -34,20 +34,20 @@ Establish bidirectional communication between TabController and Tab/Pane compone
 
 ## Acceptance Criteria
 
-- [ ] `TabController.addTab()` calls `tab.setController(this)`
-- [ ] `TabController.addTabs()` calls setController for each tab
-- [ ] `TabController.addPane()` calls `pane.setController(this)`
-- [ ] `TabController.addPanes()` calls setController for each pane
-- [ ] Tab.isActive() correctly queries controller state
-- [ ] Pane.isActive() correctly queries controller state
-- [ ] Changing active tab via `setActive()` updates component state
-- [ ] Manual test: create controller, add tab, verify isActive() works
-- [ ] Manual test: create controller, add pane, verify isActive() works
-- [ ] Manual test: change active tab, verify both old and new tabs update
-- [ ] No circular reference errors in TypeScript
-- [ ] TypeScript strict mode compliance
-- [ ] `mise run lint` passes
-- [ ] `mise run build` succeeds
+- [x] `TabController.addTab()` calls `tab.setController(this)`
+- [x] `TabController.addTabs()` calls setController for each tab
+- [x] `TabController.addPane()` calls `pane.setController(this)`
+- [x] `TabController.addPanes()` calls setController for each pane
+- [x] Tab.isActive() correctly queries controller state
+- [x] Pane.isActive() correctly queries controller state
+- [x] Changing active tab via `setActive()` updates component state
+- [x] Manual test: create controller, add tab, verify isActive() works
+- [x] Manual test: create controller, add pane, verify isActive() works
+- [x] Manual test: change active tab, verify both old and new tabs update
+- [x] No circular reference errors in TypeScript
+- [x] TypeScript strict mode compliance
+- [x] `mise run lint` passes
+- [x] `mise run build` succeeds
 
 ## Manual Testing
 

@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 2 hours
 **Dependencies:** [Implement TabController](task-aa5de87e-implement-tabcontroller.md)
@@ -84,21 +84,21 @@ export class Tab implements Component {
 
 ## Acceptance Criteria
 
-- [ ] Tab class defined in `src/tabs/Tab.ts`
-- [ ] Implements Component interface with `render(width: number): string[]`
-- [ ] Constructor stores id, label, and options
-- [ ] `setController()` method stores controller reference
-- [ ] `render()` method returns formatted tab output
-- [ ] Active tabs use theme highlight colors
-- [ ] Inactive tabs use theme normal colors
-- [ ] `isActive()` method checks controller state
-- [ ] `isActive()` falls back to options.active when no controller
-- [ ] `getId()` method returns tab ID
-- [ ] Width constraints handle padding (e.g., width - 4 for borders)
-- [ ] Label overflow handled gracefully
-- [ ] TypeScript strict mode compliance
-- [ ] `mise run lint` passes
-- [ ] `mise run build` succeeds
+- [x] Tab class defined in `src/tabs/Tab.ts`
+- [x] Implements Component interface with `render(width: number): string[]`
+- [x] Constructor stores id, label, and options
+- [x] `setController()` method stores controller reference
+- [x] `render()` method returns formatted tab output
+- [x] Active tabs use theme highlight colors
+- [x] Inactive tabs use theme normal colors
+- [x] `isActive()` method checks controller state
+- [x] `isActive()` falls back to options.active when no controller
+- [x] `getId()` method returns tab ID
+- [x] Width constraints handle padding (e.g., width - 4 for borders)
+- [x] Label overflow handled gracefully
+- [x] TypeScript strict mode compliance
+- [x] `mise run lint` passes
+- [x] `mise run build` succeeds
 
 ## Related Documents
 

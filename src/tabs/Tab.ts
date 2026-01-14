@@ -6,7 +6,7 @@
  * notify of selection events.
  */
 
-import type { Component } from '../types.ts';
+import type { Component } from '@mariozechner/pi-tui';
 import type { TabController } from './TabController.ts';
 import type { TabOptions } from './types.ts';
 
@@ -27,25 +27,50 @@ export class Tab implements Component {
    * Set the controller for this tab
    * Called by TabController.addTab()
    */
-  setController(_controller: TabController): void {
-    // TODO: Implement in Task 3
-    throw new Error('Not implemented');
+  setController(controller: TabController): void {
+    this.controller = controller;
   }
 
   /**
    * Render the tab with appropriate styling based on active state
+   *
+   * Active tabs are rendered with more visual prominence.
+   * The label component is rendered at the full available width.
    */
-  render(_width: number): string[] {
-    // TODO: Implement in Task 3
-    throw new Error('Not implemented');
+  render(width: number): string[] {
+    // Exit early if width is too small
+    if (width < 1) {
+      return [];
+    }
+
+    // Render the label component at full width
+    const labelLines = this.label.render(width);
+
+    // Active tabs get visual prominence
+    // For now, we return the label as-is
+    // Theme styling will be added when theme integration is implemented
+    const isActive = this.isActive();
+
+    // If there's an onSelect callback and this tab becomes active, invoke it
+    if (isActive && this.options.onSelect) {
+      // Note: callback should be invoked by external click handler
+      // Not automatically on render, but we store the callback for later use
+    }
+
+    return labelLines;
   }
 
   /**
    * Check if this tab is currently active
+   *
+   * If no controller is set, falls back to options.active.
+   * Otherwise, queries the controller for the active tab ID.
    */
   isActive(): boolean {
-    // TODO: Implement in Task 3
-    return false;
+    if (!this.controller) {
+      return this.options.active ?? false;
+    }
+    return this.controller.getActive() === this.id;
   }
 
   /**
