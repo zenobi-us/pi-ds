@@ -6,7 +6,7 @@
 A TUI design system for pi-mono. Built as a Bun module targeting ES2021+.
 
 ## Current Status
-**Status:** Phase 3 Complete & Archived – Phase 4 Planning Underway
+**Status:** Phase 3 Archived – Phase 4 Planning Underway
 **Active Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
 **Active Phases:** Phase 4: Input Components (Definition & Planning)
 
@@ -27,7 +27,7 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 ### Current Phase Status
 - ✅ Phase 1: Foundation & Testing Infrastructure (Completed 2026-01-12)
 - ✅ Phase 2: Testing Infrastructure Setup (Completed 2026-01-14)
-- ✅ Phase 3: Interactive Components (Archived - Tabs component complete)
+- ✅ Phase 3: Interactive Components (Archived – Tabs component delivered, tasks archived 2026-01-14)
 - 🔄 Phase 4: Input Components (Definition & Planning)
 - ⏳ Phase 5: Documentation & Publishing (Planned)
 
@@ -37,7 +37,7 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 - ✅ Implemented comprehensive test helper utilities
 - ✅ Created test directory structure with unit/integration/helpers
 - ✅ Established vitest snapshot testing infrastructure
-- ✅ **121 tests passing** across 4 component test suites
+- ✅ Created 121 tests passing across 4 component test suites
 - ✅ Alert Component: 21 tests covering all functionality
 - ✅ Container Component: 20 tests for layout and styling
 - ✅ Flex Component: 40 tests for flexbox behavior
@@ -48,8 +48,8 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 
 ### Phase 3: Interactive Components Complete (2026-01-14)
 - ✅ Tabs component (TabController, Tab, Pane) fully implemented across 12 detailed tasks
-- ✅ Test suites (unit, integration, snapshot) and documentation completed
-- ✅ Phase file and supporting work archived for future reference ([archive/phase-f89b39da-tabs-component-implementation.md](archive/phase-f89b39da-tabs-component-implementation.md))
+- ✅ Unit, integration, and snapshot suites completed along with documentation
+- ✅ Phase and task files archived for future reference ([archive/phase-f89b39da-tabs-component-implementation.md](archive/phase-f89b39da-tabs-component-implementation.md))
 - 📚 Learnings distilled to [Tabs Component Implementation](learning-tabs-component.md)
 
 ### Epic Defined (2026-01-14)
@@ -78,9 +78,9 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 ## GitHub Integration
 
 ### Issue #4: Tabs Component
-- **Status:** Planned
+- **Status:** Completed & Archived
 - **Specification:** [Tabs Component Specification](research-e193044a-tabs-component-specification.md)
-- **Implementation Plan:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
+- **Implementation Plan:** [Tabs Component Implementation](archive/phase-f89b39da-tabs-component-implementation.md)
 - **Epic Association:** Phase 3: Interactive Components
 - **URL:** https://github.com/zenobi-us/pi-ds/issues/4
 
@@ -105,20 +105,16 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 ## Next Steps
 
 ### Immediate
-1. Begin Phase 3: Interactive Components
-2. Implement Tabs component (GitHub issue #4)
-3. Execute 12 individual MDTM tasks from [todo.md](todo.md)
-4. Maintain >80% test coverage
+1. Define requirements and interactions for Phase 4 input components (TextInput, Select, Checkbox, Radio)
+2. Draft Phase 4 implementation plan with task breakdown, dependencies, and estimates
+3. Document validation, accessibility, and theming expectations for input components
+4. Update the todo board with the new planning tasks and any research spikes
 
 ### Task Files
-Phase 3 implementation is organized into 12 individual MDTM task files. See [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md) for the complete task list and execution order.
+- Phase 3 implementation is archived; reference ([archive/phase-f89b39da-tabs-component-implementation.md](archive/phase-f89b39da-tabs-component-implementation.md)) for historical detail
+- Phase 4 planning artifacts to be created as requirements firm up
 
-**Task Summary:**
-- 12 tasks total, estimated 18-22 hours (3-5 days)
-- Tasks cover implementation, testing, documentation, and polish
-- All tasks linked from the phase file for easy navigation
-
-### Future Phases
+## Future Phases
 1. Phase 4: Input Components (TextInput, Select, Checkbox, Radio)
 2. Phase 5: Documentation & Publishing
 
@@ -126,15 +122,15 @@ Phase 3 implementation is organized into 12 individual MDTM task files. See [Tab
 - [Epic: pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md) 🔄
 
 ## Active Phases
-- [Phase: Interactive Components](epic-62d4d25c-pi-ds-tui-design-system.md#phase-3-interactive-components-) - Ready to Start
-- [Phase: Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md) - Ready to Start
+- Phase 4: Input Components (Definition & Planning) – planning and research
+- Phase 5: Documentation & Publishing (Planned)
 
 ## Completed Research
 - [Research: Unit Testing TUI Components](research-5d437659-unit-testing-tui-components.md) ✅
 - [Research: Tabs Component Specification](research-e193044a-tabs-component-specification.md) ✅
 
 ## Planning Documents
-- [Phase: Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md) - 12 tasks, 3-5 days
+- [Phase: Tabs Component Implementation](archive/phase-f89b39da-tabs-component-implementation.md) - 12 tasks, 3-5 days
 
 ## Learnings Repository
 - [Component Architecture Patterns](learning-62c593ff-component-architecture-patterns.md)
