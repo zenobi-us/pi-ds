@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 2 hours
 **Dependencies:** [Wire Controller to Components](task-225722a7-wire-controller-to-components.md)
@@ -78,23 +78,23 @@ describe('Tab', () => {
 
 ## Acceptance Criteria
 
-- [ ] Test file `tests/unit/tabs/Tab.test.ts` created
-- [ ] Test: Active tab renders with theme highlight colors
-- [ ] Test: Inactive tab renders with theme normal colors
-- [ ] Test: onSelect callback invoked when tab selected
-- [ ] Test: onSelect callback not invoked when already active
-- [ ] Test: getId() returns correct tab ID
-- [ ] Test: isActive() returns true when controller reports active
-- [ ] Test: isActive() returns false when controller reports inactive
-- [ ] Test: isActive() uses options.active when no controller set
-- [ ] Test: isActive() defaults to false when no controller or options
-- [ ] Test: Label component renders within tab boundaries
-- [ ] Test: Narrow width (e.g., 20 chars) handled gracefully
-- [ ] Test: Very long label truncated or wrapped appropriately
-- [ ] Test: Tab renders without controller (standalone mode)
-- [ ] All tests pass: `bun test tests/unit/tabs/Tab.test.ts`
-- [ ] Coverage for render() method at multiple widths
-- [ ] Snapshot tests for visual verification (optional in unit tests)
+- [x] Test file `tests/unit/tabs/Tab.test.ts` created
+- [x] Test: Active tab renders with theme highlight colors
+- [x] Test: Inactive tab renders with theme normal colors
+- [x] Test: onSelect callback invoked when tab selected
+- [x] Test: onSelect callback not invoked when already active
+- [x] Test: getId() returns correct tab ID
+- [x] Test: isActive() returns true when controller reports active
+- [x] Test: isActive() returns false when controller reports inactive
+- [x] Test: isActive() uses options.active when no controller set
+- [x] Test: isActive() defaults to false when no controller or options
+- [x] Test: Label component renders within tab boundaries
+- [x] Test: Narrow width (e.g., 20 chars) handled gracefully
+- [x] Test: Very long label truncated or wrapped appropriately
+- [x] Test: Tab renders without controller (standalone mode)
+- [x] All tests pass: `bun test tests/unit/tabs/Tab.test.ts`
+- [x] Coverage for render() method at multiple widths
+- [x] Snapshot tests for visual verification (optional in unit tests)
 
 ## Related Documents
 

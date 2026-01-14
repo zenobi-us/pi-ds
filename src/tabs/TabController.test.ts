@@ -12,6 +12,9 @@ import { createTestTheme } from '../test-helpers';
 describe('TabController', () => {
   const theme = createTestTheme();
 
+  // Helper to create a Text component with test theme
+  const createText = (text: string) => new Text(theme.fg('text', text), 0, 0);
+
   describe('Initialization', () => {
     it('should initialize with empty state', () => {
       const controller = new TabController();
@@ -24,7 +27,7 @@ describe('TabController', () => {
   describe('Adding Tabs', () => {
     it('should add and retrieve a single tab', () => {
       const controller = new TabController();
-      const tab = new Tab('tab1', new Text(theme, 'Tab 1'));
+      const tab = new Tab('tab1', createText('Tab 1'));
 
       controller.addTab(tab);
 
@@ -33,9 +36,9 @@ describe('TabController', () => {
 
     it('should add multiple tabs at once', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab2', new Text(theme, 'Tab 2'));
-      const tab3 = new Tab('tab3', new Text(theme, 'Tab 3'));
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab2', createText('Tab 2'));
+      const tab3 = new Tab('tab3', createText('Tab 3'));
 
       controller.addTabs(tab1, tab2, tab3);
 
@@ -46,8 +49,8 @@ describe('TabController', () => {
 
     it('should auto-activate first tab when no active tab set', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab2', new Text(theme, 'Tab 2'));
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab2', createText('Tab 2'));
 
       controller.addTab(tab1);
       controller.addTab(tab2);
@@ -57,8 +60,8 @@ describe('TabController', () => {
 
     it('should activate tab marked as active in options', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab2', new Text(theme, 'Tab 2'), { active: true });
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab2', createText('Tab 2'), { active: true });
 
       controller.addTab(tab1);
       controller.addTab(tab2);
@@ -68,7 +71,7 @@ describe('TabController', () => {
 
     it('should set controller reference on added tab', () => {
       const controller = new TabController();
-      const tab = new Tab('tab1', new Text(theme, 'Tab 1'));
+      const tab = new Tab('tab1', createText('Tab 1'));
 
       controller.addTab(tab);
 
@@ -80,7 +83,7 @@ describe('TabController', () => {
   describe('Adding Panes', () => {
     it('should add and retrieve a single pane', () => {
       const controller = new TabController();
-      const pane = new Pane('tab1', new Text(theme, 'Content 1'));
+      const pane = new Pane('tab1', createText('Content 1'));
 
       controller.addPane(pane);
 
@@ -89,9 +92,9 @@ describe('TabController', () => {
 
     it('should add multiple panes at once', () => {
       const controller = new TabController();
-      const pane1 = new Pane('tab1', new Text(theme, 'Content 1'));
-      const pane2 = new Pane('tab2', new Text(theme, 'Content 2'));
-      const pane3 = new Pane('tab3', new Text(theme, 'Content 3'));
+      const pane1 = new Pane('tab1', createText('Content 1'));
+      const pane2 = new Pane('tab2', createText('Content 2'));
+      const pane3 = new Pane('tab3', createText('Content 3'));
 
       controller.addPanes(pane1, pane2, pane3);
 
@@ -102,8 +105,8 @@ describe('TabController', () => {
 
     it('should set controller reference on added pane', () => {
       const controller = new TabController();
-      const tab = new Tab('tab1', new Text(theme, 'Tab 1'), { active: true });
-      const pane = new Pane('tab1', new Text(theme, 'Content 1'));
+      const tab = new Tab('tab1', createText('Tab 1'), { active: true });
+      const pane = new Pane('tab1', createText('Content 1'));
 
       controller.addTab(tab);
       controller.addPane(pane);
@@ -116,8 +119,8 @@ describe('TabController', () => {
   describe('Active State Management', () => {
     it('should set and get active tab', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab2', new Text(theme, 'Tab 2'));
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab2', createText('Tab 2'));
 
       controller.addTabs(tab1, tab2);
       controller.setActive('tab2');
@@ -127,7 +130,7 @@ describe('TabController', () => {
 
     it('should throw error for invalid tab ID', () => {
       const controller = new TabController();
-      const tab = new Tab('tab1', new Text(theme, 'Tab 1'));
+      const tab = new Tab('tab1', createText('Tab 1'));
 
       controller.addTab(tab);
 
@@ -138,8 +141,8 @@ describe('TabController', () => {
 
     it('should update tab active state when setActive is called', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab2', new Text(theme, 'Tab 2'));
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab2', createText('Tab 2'));
 
       controller.addTabs(tab1, tab2);
 
@@ -154,10 +157,10 @@ describe('TabController', () => {
 
     it('should update pane active state when setActive is called', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab2', new Text(theme, 'Tab 2'));
-      const pane1 = new Pane('tab1', new Text(theme, 'Content 1'));
-      const pane2 = new Pane('tab2', new Text(theme, 'Content 2'));
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab2', createText('Tab 2'));
+      const pane1 = new Pane('tab1', createText('Content 1'));
+      const pane2 = new Pane('tab2', createText('Content 2'));
 
       controller.addTabs(tab1, tab2);
       controller.addPanes(pane1, pane2);
@@ -185,8 +188,8 @@ describe('TabController', () => {
 
     it('should handle multiple tabs with different IDs', () => {
       const controller = new TabController();
-      const tab1 = new Tab('tab1', new Text(theme, 'Tab 1'));
-      const tab2 = new Tab('tab1', new Text(theme, 'Tab 1 Duplicate')); // Same ID
+      const tab1 = new Tab('tab1', createText('Tab 1'));
+      const tab2 = new Tab('tab1', createText('Tab 1 Duplicate')); // Same ID
 
       controller.addTab(tab1);
       controller.addTab(tab2);
@@ -216,8 +219,8 @@ describe('TabController', () => {
 
     it('should retrieve tabs by ID', () => {
       const controller = new TabController();
-      const tab1 = new Tab('home', new Text(theme, 'Home'));
-      const tab2 = new Tab('settings', new Text(theme, 'Settings'));
+      const tab1 = new Tab('home', createText('Home'));
+      const tab2 = new Tab('settings', createText('Settings'));
 
       controller.addTabs(tab1, tab2);
 
@@ -227,8 +230,8 @@ describe('TabController', () => {
 
     it('should retrieve panes by tab ID', () => {
       const controller = new TabController();
-      const pane1 = new Pane('home', new Text(theme, 'Home Content'));
-      const pane2 = new Pane('settings', new Text(theme, 'Settings Content'));
+      const pane1 = new Pane('home', createText('Home Content'));
+      const pane2 = new Pane('settings', createText('Settings Content'));
 
       controller.addPanes(pane1, pane2);
 

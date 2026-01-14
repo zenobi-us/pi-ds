@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 1.5 hours
 **Dependencies:** [Wire Controller to Components](task-225722a7-wire-controller-to-components.md)
@@ -82,20 +82,20 @@ describe('Pane', () => {
 
 ## Acceptance Criteria
 
-- [ ] Test file `tests/unit/tabs/Pane.test.ts` created
-- [ ] Test: Pane renders content.render() when active
-- [ ] Test: Pane returns empty array when inactive
-- [ ] Test: Content rendered at full width (no padding reduction)
-- [ ] Test: isActive() returns true when controller.getActive() matches tabId
-- [ ] Test: isActive() returns false when controller.getActive() differs
-- [ ] Test: isActive() returns false when no controller set
-- [ ] Test: getTabId() returns correct tab ID
-- [ ] Test: Complex content (Container with children) renders correctly
-- [ ] Test: Empty/minimal content handled gracefully
-- [ ] Test: Content width matches pane width
-- [ ] Test: Multiple panes with same controller, only one active
-- [ ] All tests pass: `bun test tests/unit/tabs/Pane.test.ts`
-- [ ] Coverage for render() method in both active/inactive states
+- [x] Test file `tests/unit/tabs/Pane.test.ts` created
+- [x] Test: Pane renders content.render() when active
+- [x] Test: Pane returns empty array when inactive
+- [x] Test: Content rendered at full width (no padding reduction)
+- [x] Test: isActive() returns true when controller.getActive() matches tabId
+- [x] Test: isActive() returns false when controller.getActive() differs
+- [x] Test: isActive() returns false when no controller set
+- [x] Test: getTabId() returns correct tab ID
+- [x] Test: Complex content (Container with children) renders correctly
+- [x] Test: Empty/minimal content handled gracefully
+- [x] Test: Content width matches pane width
+- [x] Test: Multiple panes with same controller, only one active
+- [x] All tests pass: `bun test tests/unit/tabs/Pane.test.ts`
+- [x] Coverage for render() method in both active/inactive states
 
 ## Related Documents
 

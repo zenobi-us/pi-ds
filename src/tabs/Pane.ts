@@ -39,6 +39,11 @@ export class Pane implements Component {
       return [];
     }
 
+    // Exit early for invalid widths
+    if (width < 1) {
+      return [];
+    }
+
     // Render content at full width
     return this.content.render(width);
   }
