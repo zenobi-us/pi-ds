@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** medium
 **Estimated Time:** 2 hours
 **Dependencies:** [Integration Tests](task-a9daad6f-integration-tests.md)
@@ -99,21 +99,21 @@ describe('Tabs Snapshots', () => {
 
 ## Acceptance Criteria
 
-- [ ] Test file `tests/integration/tabs/tabs-snapshots.test.ts` created
-- [ ] Snapshot: Horizontal tabs at 80 character width
-- [ ] Snapshot: Horizontal tabs at 120 character width
-- [ ] Snapshot: Horizontal tabs at 160 character width
-- [ ] Snapshot: Active tab with highlight styling
-- [ ] Snapshot: Inactive tab with normal styling
-- [ ] Snapshot: Multiple tabs side-by-side in container
-- [ ] Snapshot: Tab with long label showing truncation/wrapping
-- [ ] Snapshot: Complete tabbed interface (tabs + panes + layout)
-- [ ] Snapshot: Tab switching (before and after state)
-- [ ] All snapshots generated: `bun test -u tests/integration/tabs/tabs-snapshots.test.ts`
-- [ ] Snapshots manually reviewed for correctness
-- [ ] Snapshots committed to git repository
-- [ ] normalizeOutput helper used for consistent snapshots
-- [ ] Snapshots pass on subsequent runs: `bun test tests/integration/tabs/tabs-snapshots.test.ts`
+- [x] Test file `tests/integration/tabs/tabs-snapshots.test.ts` created
+- [x] Snapshot: Horizontal tabs at 80 character width
+- [x] Snapshot: Horizontal tabs at 120 character width
+- [x] Snapshot: Horizontal tabs at 160 character width
+- [x] Snapshot: Active tab with highlight styling
+- [x] Snapshot: Inactive tab with normal styling
+- [x] Snapshot: Multiple tabs side-by-side in container
+- [x] Snapshot: Tab with long label showing truncation/wrapping
+- [x] Snapshot: Complete tabbed interface (tabs + panes + layout)
+- [x] Snapshot: Tab switching (before and after state)
+- [x] All snapshots generated: `bun test -u tests/integration/tabs/tabs-snapshots.test.ts`
+- [x] Snapshots manually reviewed for correctness
+- [x] Snapshots committed to git repository
+- [x] normalizeOutput helper used for consistent snapshots
+- [x] Snapshots pass on subsequent runs: `bun test tests/integration/tabs/tabs-snapshots.test.ts`
 
 ## Snapshot Normalization
 

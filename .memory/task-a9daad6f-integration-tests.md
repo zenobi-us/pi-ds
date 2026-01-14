@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 3 hours
 **Dependencies:**
@@ -111,23 +111,23 @@ describe('Tabs Integration', () => {
 
 ## Acceptance Criteria
 
-- [ ] Test file `tests/integration/tabs/tabs-integration.test.ts` created
-- [ ] Test: Full tabbed interface renders correctly
-- [ ] Test: Tab switching changes visible pane
-- [ ] Test: Multiple tabs and panes work together
-- [ ] Test: Integration with Flex layout (side-by-side tabs/content)
-- [ ] Test: Integration with Container (stacked tabs/content)
-- [ ] Test: Integration with Sized (fixed-width sidebar)
-- [ ] Test: Theme colors applied to active tabs
-- [ ] Test: Theme colors applied to inactive tabs
-- [ ] Test: Rendering at 80 character width
-- [ ] Test: Rendering at 120 character width
-- [ ] Test: Rendering at 160 character width
-- [ ] Test: Horizontal tab layout pattern
-- [ ] Test: Example from specification document works
-- [ ] Test: Complex nested layouts with tabs
-- [ ] All tests pass: `bun test tests/integration/tabs/`
-- [ ] No integration issues between components
+- [x] Test file `tests/integration/tabs/tabs-integration.test.ts` created
+- [x] Test: Full tabbed interface renders correctly
+- [x] Test: Tab switching changes visible pane
+- [x] Test: Multiple tabs and panes work together
+- [x] Test: Integration with Flex layout (side-by-side tabs/content)
+- [x] Test: Integration with Container (stacked tabs/content)
+- [x] Test: Integration with Sized (fixed-width sidebar)
+- [x] Test: Theme colors applied to active tabs
+- [x] Test: Theme colors applied to inactive tabs
+- [x] Test: Rendering at 80 character width
+- [x] Test: Rendering at 120 character width
+- [x] Test: Rendering at 160 character width
+- [x] Test: Horizontal tab layout pattern
+- [x] Test: Example from specification document works
+- [x] Test: Complex nested layouts with tabs
+- [x] All tests pass: `bun test tests/integration/tabs/`
+- [x] No integration issues between components
 
 ## Related Documents
 
