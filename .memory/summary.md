@@ -101,8 +101,23 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 ### Immediate
 1. Begin Phase 3: Interactive Components
 2. Implement Tabs component (GitHub issue #4)
-3. Follow 12-task implementation plan
+3. Execute 12 individual MDTM tasks from [todo.md](todo.md)
 4. Maintain >80% test coverage
+
+### Task Breakdown
+Phase 3 implementation split into 12 individual MDTM task files:
+1. [Setup & Structure](task-cc5daf26-setup-and-structure.md) - 30 min
+2. [Implement TabController](task-aa5de87e-implement-tabcontroller.md) - 2 hours
+3. [Implement Tab Component](task-51febb21-implement-tab-component.md) - 2 hours
+4. [Implement Pane Component](task-a7be368b-implement-pane-component.md) - 1 hour
+5. [Wire Controller to Components](task-225722a7-wire-controller-to-components.md) - 1 hour
+6. [Unit Tests - TabController](task-392b4567-unit-tests-tabcontroller.md) - 2 hours
+7. [Unit Tests - Tab Component](task-1ebf02fe-unit-tests-tab-component.md) - 2 hours
+8. [Unit Tests - Pane Component](task-a3abc41b-unit-tests-pane-component.md) - 1.5 hours
+9. [Integration Tests](task-a9daad6f-integration-tests.md) - 3 hours
+10. [Snapshot Tests](task-e1dfec99-snapshot-tests.md) - 2 hours
+11. [Documentation](task-0745e47b-documentation.md) - 2 hours
+12. [Code Review & Polish](task-7096a127-code-review-and-polish.md) - 1 hour
 
 ### Future Phases
 1. Phase 4: Input Components (TextInput, Select, Checkbox, Radio)
