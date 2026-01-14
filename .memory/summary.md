@@ -104,20 +104,13 @@ Build a comprehensive, reusable TUI design system for pi-mono with production-re
 3. Execute 12 individual MDTM tasks from [todo.md](todo.md)
 4. Maintain >80% test coverage
 
-### Task Breakdown
-Phase 3 implementation split into 12 individual MDTM task files:
-1. [Setup & Structure](task-cc5daf26-setup-and-structure.md) - 30 min
-2. [Implement TabController](task-aa5de87e-implement-tabcontroller.md) - 2 hours
-3. [Implement Tab Component](task-51febb21-implement-tab-component.md) - 2 hours
-4. [Implement Pane Component](task-a7be368b-implement-pane-component.md) - 1 hour
-5. [Wire Controller to Components](task-225722a7-wire-controller-to-components.md) - 1 hour
-6. [Unit Tests - TabController](task-392b4567-unit-tests-tabcontroller.md) - 2 hours
-7. [Unit Tests - Tab Component](task-1ebf02fe-unit-tests-tab-component.md) - 2 hours
-8. [Unit Tests - Pane Component](task-a3abc41b-unit-tests-pane-component.md) - 1.5 hours
-9. [Integration Tests](task-a9daad6f-integration-tests.md) - 3 hours
-10. [Snapshot Tests](task-e1dfec99-snapshot-tests.md) - 2 hours
-11. [Documentation](task-0745e47b-documentation.md) - 2 hours
-12. [Code Review & Polish](task-7096a127-code-review-and-polish.md) - 1 hour
+### Task Files
+Phase 3 implementation is organized into 12 individual MDTM task files. See [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md) for the complete task list and execution order.
+
+**Task Summary:**
+- 12 tasks total, estimated 18-22 hours (3-5 days)
+- Tasks cover implementation, testing, documentation, and polish
+- All tasks linked from the phase file for easy navigation
 
 ### Future Phases
 1. Phase 4: Input Components (TextInput, Select, Checkbox, Radio)

@@ -103,6 +103,9 @@ Build a comprehensive, reusable TUI (Terminal User Interface) design system for 
 - Implement Table component
 - Create interaction patterns documentation
 
+**Implementation Plans:**
+- [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md) - 12 tasks, 3-5 days
+
 **GitHub Issues:**
 - [#4 - Tabs](https://github.com/zenobi-us/pi-ds/issues/4)
 
