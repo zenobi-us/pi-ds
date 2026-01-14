@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 2 hours
 **Dependencies:** [Wire Controller to Components](task-225722a7-wire-controller-to-components.md)
@@ -67,27 +67,27 @@ describe('TabController', () => {
 
 ## Acceptance Criteria
 
-- [ ] Test file `tests/unit/tabs/TabController.test.ts` created
-- [ ] Test: Controller initializes with null activeId
-- [ ] Test: addTab stores tab correctly
-- [ ] Test: addTab calls setController on tab
-- [ ] Test: addTabs adds multiple tabs
-- [ ] Test: addPane stores pane correctly
-- [ ] Test: addPane calls setController on pane
-- [ ] Test: addPanes adds multiple panes
-- [ ] Test: setActive updates activeId
-- [ ] Test: setActive throws error for invalid tab ID
-- [ ] Test: getActive returns current activeId
-- [ ] Test: getActive returns null initially
-- [ ] Test: getTab returns correct tab by ID
-- [ ] Test: getTab returns undefined for non-existent ID
-- [ ] Test: getPane returns correct pane by ID
-- [ ] Test: getPane returns undefined for non-existent ID
-- [ ] Test: First tab with active:true becomes active automatically
-- [ ] Test: Adding duplicate tab IDs (define expected behavior)
-- [ ] All tests pass: `bun test tests/unit/tabs/TabController.test.ts`
-- [ ] Coverage for all public methods
-- [ ] TypeScript strict mode compliance
+- [x] Test file `tests/unit/tabs/TabController.test.ts` created
+- [x] Test: Controller initializes with null activeId
+- [x] Test: addTab stores tab correctly
+- [x] Test: addTab calls setController on tab
+- [x] Test: addTabs adds multiple tabs
+- [x] Test: addPane stores pane correctly
+- [x] Test: addPane calls setController on pane
+- [x] Test: addPanes adds multiple panes
+- [x] Test: setActive updates activeId
+- [x] Test: setActive throws error for invalid tab ID
+- [x] Test: getActive returns current activeId
+- [x] Test: getActive returns null initially
+- [x] Test: getTab returns correct tab by ID
+- [x] Test: getTab returns undefined for non-existent ID
+- [x] Test: getPane returns correct pane by ID
+- [x] Test: getPane returns undefined for non-existent ID
+- [x] Test: First tab with active:true becomes active automatically
+- [x] Test: Adding duplicate tab IDs (define expected behavior)
+- [x] All tests pass: `bun test tests/unit/tabs/TabController.test.ts`
+- [x] Coverage for all public methods
+- [x] TypeScript strict mode compliance
 
 ## Related Documents
 

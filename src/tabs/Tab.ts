@@ -79,4 +79,12 @@ export class Tab implements Component {
   getId(): string {
     return this.id;
   }
+
+  /**
+   * Check if tab was marked as active in options
+   * Used internally by TabController during registration
+   */
+  wasMarkedActive(): boolean {
+    return this.options.active ?? false;
+  }
 }
