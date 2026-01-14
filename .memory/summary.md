@@ -1,43 +1,96 @@
 # Project Summary: pi-ds
 
-**Last Updated:** 2026-01-13
+**Last Updated:** 2026-01-14
 
 ## Project Overview
 A TUI design system for pi-mono. Built as a Bun module targeting ES2021+.
 
 ## Current Status
-**Status:** Research Phase - Unit Testing
-**Active Epic:** None (pre-epic research phase)
-**Active Phases:** None
+**Status:** Phase 3 Archived – Phase 4 Planning Underway
+**Active Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
+**Active Phases:** Phase 4: Input Components (Definition & Planning)
+
+## Active Epic: pi-ds TUI Design System
+
+**Timeline:** Q1 2026
+**Status:** In Progress
+
+### Vision
+Build a comprehensive, reusable TUI design system for pi-mono with production-ready components following modern design principles.
+
+### Success Criteria
+- Core component library with 10+ reusable components
+- Comprehensive unit test coverage (>80%)
+- Complete documentation with examples
+- Published as Bun module on npm
+
+### Current Phase Status
+- ✅ Phase 1: Foundation & Testing Infrastructure (Completed 2026-01-12)
+- ✅ Phase 2: Testing Infrastructure Setup (Completed 2026-01-14)
+- ✅ Phase 3: Interactive Components (Archived – Tabs component delivered, tasks archived 2026-01-14)
+- 🔄 Phase 4: Input Components (Definition & Planning)
+- ⏳ Phase 5: Documentation & Publishing (Planned)
 
 ## Recent Accomplishments
+
+### Phase 2: Testing Infrastructure Complete (2026-01-14)
+- ✅ Implemented comprehensive test helper utilities
+- ✅ Created test directory structure with unit/integration/helpers
+- ✅ Established vitest snapshot testing infrastructure
+- ✅ Created 121 tests passing across 4 component test suites
+- ✅ Alert Component: 21 tests covering all functionality
+- ✅ Container Component: 20 tests for layout and styling
+- ✅ Flex Component: 40 tests for flexbox behavior
+- ✅ Grid Component: 40 tests for grid layouts
+- ✅ Test theme factory and output matchers implemented
+- ✅ Snapshot normalization configured for consistent testing
+- ✅ Testing patterns and best practices documented
+
+### Phase 3: Interactive Components Complete (2026-01-14)
+- ✅ Tabs component (TabController, Tab, Pane) fully implemented across 12 detailed tasks
+- ✅ Unit, integration, and snapshot suites completed along with documentation
+- ✅ Phase and task files archived for future reference ([archive/phase-f89b39da-tabs-component-implementation.md](archive/phase-f89b39da-tabs-component-implementation.md))
+- 📚 Learnings distilled to [Tabs Component Implementation](learning-tabs-component.md)
+
+### Epic Defined (2026-01-14)
+- ✅ Created comprehensive project epic with vision and phases
+- ✅ Defined 5 implementation phases with clear goals
+- ✅ Mapped out component roadmap (10+ components)
+- ✅ Established success criteria and timeline
+
+### Tabs Component Planning (2026-01-14)
+- ✅ Created detailed specification for Tabs component (issue #4)
+- ✅ Defined component architecture (TabController, Tab, Pane)
+- ✅ Documented usage patterns and API design
+- ✅ Created implementation plan with 12 detailed tasks
+- ✅ Estimated timeline: 3-5 days (18-22 hours)
 
 ### Research Completed: Unit Testing TUI Components (2026-01-13)
 - ✅ Comprehensive research on testing TUI component output
 - ✅ Identified vitest snapshot testing as primary strategy
-- ✅ Documented patterns for testing layout components (Flex, Grid)
-- ✅ Established ANSI code handling approaches (strip-ansi)
-- ✅ Created example test patterns for Alert and Flex components
-- ✅ Defined testing utilities and helper functions to implement
-- ✅ Documented anti-patterns to avoid and best practices
+- ✅ Documented patterns for testing layout components
+- ✅ Established ANSI code handling approaches
+- ✅ Created example test patterns
+- ✅ Defined testing utilities and helper functions
 
-**Key Findings:**
-- Vitest snapshot testing ideal for TUI rendering verification
-- Use `toMatchSnapshot()` for full output, `toMatchInlineSnapshot()` for embedded tests
-- Handle ANSI codes with `strip-ansi` for logic tests or test with codes for integration
-- Test at multiple widths (40, 80, 120, 160) for responsive behavior
-- Focus on edge cases: empty, single child, overflow, minimum width, zero width
-- Create helper utilities: test theme, output matchers, width testers
+**Research Document:** [Unit Testing TUI Components](research-5d437659-unit-testing-tui-components.md)
 
-**Research Document:** `.memory/research-5d437659-unit-testing-tui-components.md`
+## GitHub Integration
+
+### Issue #4: Tabs Component
+- **Status:** Completed & Archived
+- **Specification:** [Tabs Component Specification](research-e193044a-tabs-component-specification.md)
+- **Implementation Plan:** [Tabs Component Implementation](archive/phase-f89b39da-tabs-component-implementation.md)
+- **Epic Association:** Phase 3: Interactive Components
+- **URL:** https://github.com/zenobi-us/pi-ds/issues/4
 
 ## Key Information
 - **Type:** TUI design system for pi-mono
 - **Runtime:** Bun
 - **Target:** ES2021+
 - **Purpose:** Provide reusable TUI components and patterns
-- **Test Framework:** vitest (already configured)
-- **Components:** Alert, Flex, Grid, Modal, Sized
+- **Test Framework:** vitest (configured)
+- **Components:** Alert, Flex, Grid, Modal, Sized, Text, Container
 
 ## Build & Test Commands
 - Build: `mise run build` or `bun build ./src/index.ts --outdir dist --target bun`
@@ -50,21 +103,43 @@ A TUI design system for pi-mono. Built as a Bun module targeting ES2021+.
 - Format: `mise run format`
 
 ## Next Steps
-1. Review research findings with human
-2. Implement test helper utilities
-3. Create first test files for Alert and Flex components
-4. Install `strip-ansi` package
-5. Set up test directory structure
-6. Define project epic to establish vision and goals
 
-## Active Epics
-_None yet - awaiting epic definition_
+### Immediate
+1. Define requirements and interactions for Phase 4 input components (TextInput, Select, Checkbox, Radio)
+2. Draft Phase 4 implementation plan with task breakdown, dependencies, and estimates
+3. Document validation, accessibility, and theming expectations for input components
+4. Update the todo board with the new planning tasks and any research spikes
+
+### Task Files
+- Phase 3 implementation is archived; reference ([archive/phase-f89b39da-tabs-component-implementation.md](archive/phase-f89b39da-tabs-component-implementation.md)) for historical detail
+- Phase 4 planning artifacts to be created as requirements firm up
+
+## Future Phases
+1. Phase 4: Input Components (TextInput, Select, Checkbox, Radio)
+2. Phase 5: Documentation & Publishing
+
+## Active Epic
+- [Epic: pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md) 🔄
 
 ## Active Phases
-_None yet - awaiting phase planning_
+- Phase 4: Input Components (Definition & Planning) – planning and research
+- Phase 5: Documentation & Publishing (Planned)
 
 ## Completed Research
 - [Research: Unit Testing TUI Components](research-5d437659-unit-testing-tui-components.md) ✅
+- [Research: Tabs Component Specification](research-e193044a-tabs-component-specification.md) ✅
+
+## Planning Documents
+- [Phase: Tabs Component Implementation](archive/phase-f89b39da-tabs-component-implementation.md) - 12 tasks, 3-5 days
+
+## Learnings Repository
+- [Component Architecture Patterns](learning-62c593ff-component-architecture-patterns.md)
+- [Layout Systems](learning-96aa4357-layout-systems.md)
+- [PI Extensions Guide](learning-76e583ca-pi-extensions-guide.md)
+- [Subagent Management Patterns](learning-a9f4c2d1-subagent-management-patterns.md)
+- [Extension Command Patterns](learning-d8d1c166-extension-command-patterns.md)
+- [Extension Widget Rendering](learning-extension-widget-rendering.md)
+- [Theme Widget Patterns](learning-theme-widget-patterns.md)
 
 ## Notes
 - Project uses NeverNesters principle: avoid deeply nested structures, exit early

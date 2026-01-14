@@ -1,22 +1,18 @@
 /**
- * UI Simulator Component
+ * Design System Demo Extension
  *
- * Showcases the theme palette in realistic UI contexts:
- * - Interactive buttons and controls
- * - Message bubbles and chat interfaces
- * - Code blocks with syntax highlighting
- * - Alerts and notifications
- * - Forms and inputs
- * - Cards and panels
+ * Shows a live UI simulator showcasing the theme palette in realistic UI contexts.
+ * Runs on startup by default, can be toggled with /ds-demo command.
  */
 
+import type { ExtensionAPI } from '@mariozechner/pi-coding-agent';
 import type { Component } from '@mariozechner/pi-tui';
 import { Box, Container, Text } from '@mariozechner/pi-tui';
 import { Theme } from '@mariozechner/pi-coding-agent';
 import { Alert } from '../../src/Alert.js';
 import { Grid } from '../../src/Grid.js';
 
-export class UISimulator extends Container implements Component {
+class UISimulator extends Container implements Component {
   private sections: Container[] = [];
 
   // eslint-disable-next-line no-unused-vars
@@ -393,4 +389,46 @@ export class UISimulator extends Container implements Component {
     this.buildSections();
     this.invalidate();
   }
+}
+
+export default function (pi: ExtensionAPI) {
+  let isEnabled = true; // Enabled by default
+
+  pi.on('session_start', async (_event, ctx) => {
+    if (!ctx.hasUI) return;
+
+    if (isEnabled) {
+      // Show the UI simulator on startup
+      ctx.ui.setWidget('ds-demo', (tui, theme) => {
+        const simulator = new UISimulator(theme);
+        return simulator;
+      });
+      ctx.ui.setStatus('ds-demo', 'UI Demo Active • /ds-demo to toggle');
+    }
+  });
+
+  pi.registerCommand('ds-demo', {
+    description: 'Toggle the design system demo UI',
+    handler: async (_args, ctx) => {
+      if (!ctx.hasUI) {
+        ctx.ui.notify('UI not available in this mode', 'error');
+        return;
+      }
+
+      isEnabled = !isEnabled;
+
+      if (isEnabled) {
+        ctx.ui.setWidget('ds-demo', (tui, theme) => {
+          const simulator = new UISimulator(theme);
+          return simulator;
+        });
+        ctx.ui.setStatus('ds-demo', 'UI Demo Active • /ds-demo to toggle');
+        ctx.ui.notify('Design system demo enabled', 'success');
+      } else {
+        ctx.ui.setWidget('ds-demo', undefined);
+        ctx.ui.setStatus('ds-demo', undefined);
+        ctx.ui.notify('Design system demo disabled', 'info');
+      }
+    },
+  });
 }

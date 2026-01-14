@@ -273,8 +273,7 @@ export class Alert implements Component {
    * @param type - Alert type
    * @returns Theme color key (always "text")
    */
-  // eslint-disable-next-line no-unused-vars
-  private static getTextColor(type: AlertType): ThemeColor {
+  private static getTextColor(_type: AlertType): ThemeColor {
     // All use standard text color for readability
     return 'text';
   }
