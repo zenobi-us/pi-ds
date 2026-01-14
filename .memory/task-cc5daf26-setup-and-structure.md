@@ -2,7 +2,7 @@
 
 **Phase:** [Tabs Component Implementation](phase-f89b39da-tabs-component-implementation.md)
 **Epic:** [pi-ds TUI Design System](epic-62d4d25c-pi-ds-tui-design-system.md)
-**Status:** planned
+**Status:** completed
 **Priority:** high
 **Estimated Time:** 30 minutes
 **Dependencies:** None
@@ -42,15 +42,15 @@ src/tabs/
 
 ## Acceptance Criteria
 
-- [ ] Directory `src/tabs/` created
-- [ ] File `src/tabs/index.ts` created with barrel exports
-- [ ] File `src/tabs/TabController.ts` created with class skeleton
-- [ ] File `src/tabs/Tab.ts` created with class skeleton
-- [ ] File `src/tabs/Pane.ts` created with class skeleton
-- [ ] File `src/tabs/types.ts` created with interface definitions
-- [ ] Main `src/index.ts` updated to export tabs
-- [ ] `mise run lint` passes with no errors
-- [ ] `mise run build` succeeds
+- [x] Directory `src/tabs/` created
+- [x] File `src/tabs/index.ts` created with barrel exports
+- [x] File `src/tabs/TabController.ts` created with class skeleton
+- [x] File `src/tabs/Tab.ts` created with class skeleton
+- [x] File `src/tabs/Pane.ts` created with class skeleton
+- [x] File `src/tabs/types.ts` created with interface definitions
+- [x] Main `src/index.ts` updated to export tabs
+- [x] `mise run lint` passes with no errors (5 warnings about unused directives only)
+- [x] `mise run build` succeeds (32 modules bundled)
 
 ## Related Documents
 
